@@ -1,6 +1,6 @@
 [project]
 name = "rasp_maker_phat"
-version = "0.1.0"
+version = "0.1.1"
 authors = [
   { name="rasp-66-psar", email="chabry.dominique@orange.fr" },
 ]
