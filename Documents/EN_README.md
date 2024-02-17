@@ -516,11 +516,11 @@ This package contains three modules which are described below:
 >>>
 >>>  # Buzzer on for one second (default)
 >>>  buz.beep()
->>>  time.sleep(1)  # ​Pause before trying another beep time value
+>>>  time.sleep(1)  # Pause before trying another beep time value
 >>>
 >>>  # Buzzer on for 0.2 seconds
 >>>  buz.beep(0.2)
->>>  time.sleep(1)  # ​Pause before trying a cycle
+>>>  time.sleep(1)  # Pause before trying a cycle
 >>>
 >>>  # Cyclic operation of the buzzer
 >>>  # Cycle: ON for 0.1 seconds and OFF for 0.2 seconds.
@@ -534,10 +534,9 @@ This package contains three modules which are described below:
 </details>
  
 ## Contribution
-Les "Pull requests" sont les bienvenues.<br>
-Pour les changements majeurs, veuillez d'abord ouvrir une question
-pour discuter de ce que vous souhaitez changer.<br>
-Veillez à mettre à jour les tests le cas échéant.
+Pull requests are welcome.<br>
+For major changes, please open a question first to discuss what you want to change.<br>
+Be sure to update tests as appropriate.<br>
 
 ## License
 
