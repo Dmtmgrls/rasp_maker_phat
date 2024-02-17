@@ -1,0 +1,21 @@
+[project]
+name = "rasp_maker_phat"
+version = "0.1.0"
+authors = [
+  { name="rasp-66-psar", email="chabry.dominique@orange.fr" },
+]
+description = "Package for manage Maker-pHAT board on Raspberry 3B, 3B+, Zero 2W"
+readme = "README.md"
+requires-python = ">=3.9"
+license = {file = "LICENSE.txt"}
+keywords = ["Raspberry", "3B+", "Zero", "MAKER-pHAT", "maker-pHat"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+
+[project.urls]
+Homepage = "https://github.com/Dmtmgrls/rasp_maker_phat.git"
+Issues = "https://github.com/pypa/sampleproject/issues"
+
