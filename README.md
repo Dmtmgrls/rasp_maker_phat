@@ -11,3 +11,7 @@ The rasp_maker_phat package contains all the Python modules necessary to manage 
 >      -   [x] Indicate in README how to install the package. (0.1.2)<br>
 >      -   [ ] Make cyclical buzzer calls with threads.  (0.3.0)<br> 
 >      -   [ ] Make cyclic calls to LEDs with threads.  (0.4.0)<br>
+
+>-   **Installation packages**<br>
+>      -   pip install -i https://test.pypi.org/simple/ **rasp-maker-phat**
+>      -   pip install **RPi.GPIO**
