@@ -217,31 +217,31 @@ Ce package contient trois modules décrits ci-dessous :
 >> <summary><b>add_event_detect_switch (switch_name, trigger = GPIO.FALLING, callback = vide, temps de rebond = 50)</b> :</summary><br>
 >>
 >>>- **OBJECTIF**<br>
->>> Crée un thread qui surveille les actions effectuées sur le switch (**switch_name**) de la carte Maker-pHat.<br>
->>> L'action (**trigger**) consistera à appuyer ou à relâcher ou les deux.<br>
->>> Dès que l'action apparaît, le thread appellera la fonction (**callback**) qui traitera l'action sur le switch.<br><br>
+>>> Crée un thread qui surveille les actions effectuées sur un switch particulier (**switch_name**) de la carte Maker-pHat.<br>
+>>> L'action (**trigger**) consistera à appuyer sur ce switch ou à le relâcher ou les deux.<br>
+>>> Dès que l'action apparaît, le thread appellera la fonction (**callback**) prévue pour le traitement de cet évènement.<br><br>
 >>>- **PARAMÈTRES**
->>> - **switch_name** : str dans l'ensemble "**sw1**", "**sw2**", "**sw3**" .<br>
->>> - C'est le nom du switch de la carte Maker-pHat qui sera surveillé par le thread.<br><br>
->>> - **trigger** : indique sur quel front du signal le traitement sera déclenché.
->>> - int seulement trois valeurs possibles [GPIO.FALLING (appuyer), GPIO.RISING (relâcher) , GPIO.BOTH (appuyer ou relâcher]
->>> - Toutes les actions sur un interrupteur déclencheront un traitement soit sur le front montant du signal, soit sur le front descendant, ou les deux.<br>
->>> Dans ce dernier cas le traitement sera déclenché deux fois.<br><br>
->>> - **callback** : ce paramètre est le nom de la fonction qui sera appelée par le thread pour traiter l'événement.<br>
->>> - Le nom par défaut est **empty**.<br>
->>> Où **empty** est une fonction interne à la classe, et cette fonction ne fait rien (pass).
->>> - Si vous ne redéfinissez pas le paramètre de rappel, un thread sera quand même créé.<br>
->>> Lorsqu'un événement se produit, la fonction **empty** sera appelée mais elle ne produira aucun effet.<br>
->>> - **Attention** :<br>
->>> Le nom de la fonction de traitement n'est pas une **str**.<br>
->>> Par conséquent, ce nom ne doit pas être écrit entre guillemets ou guillemets doubles, comme le sont généralement les str.
+>>>    - **switch_name** : C'est le nom du switch de la carte Maker-pHat qui sera surveillé par le thread.<br>
+>>>        - str dans l'ensemble "**sw1**", "**sw2**", "**sw3**".<br><br>
+>>>    - **trigger** : indique sur quel front du signal le traitement sera déclenché.
+>>>        - int dans l'ensemble [ GPIO.FALLING (appuyer), GPIO.RISING (relâcher) , GPIO.BOTH (appuyer ou relâcher) ]
+>>>        - Toutes les actions sur un switch déclencheront un traitement soit sur le front montant du signal, soit sur le front descendant, ou les deux.<br>
+>>>          Dans ce dernier cas le traitement sera déclenché deux fois.<br><br>
+>>>    - **callback** : c'est le nom de la fonction qui sera appelée par le thread pour traiter l'événement.<br>
+>>>        - Le nom par défaut est **empty**.<br>
+>>>          Où **empty** est une fonction interne à la classe, et cette fonction ne fait rien (pass).
+>>>        - Si vous ne redéfinissez pas le paramètre **callback**, un thread sera quand même créé.<br>
+>>>          Lorsqu'un événement se produit, la fonction **empty** sera appelée mais elle ne produira aucun effet.<br>
+>>>        - **Attention** :<br>
+>>>          Le nom de la fonction de traitement n'est pas de type **str**.<br>
+>>>          Par conséquent, ce nom ne doit pas être écrit entre simple ou  doubles guillemets, comme le sont généralement les str.
 >>> <br><br>
->>> - **bouncetime** : temps nécessaire pour stabiliser l'état du switch.
->>> - int [0,oo[.<br>
->>> - L'unité est la milliseconde. Par défaut, sa valeur est fixée à 5O ms. <br>
->>> - **Réduire** cette valeur risque de rendre le traitement de l'évènement instable.<br>
->>> Il existe un risque que pour une même action le traitement soit ensuite lancé plusieurs fois de suite.<br>
->>> - **L'augmentation** de cette valeur retarde le traitement de l'action du switch.<br><br>
+>>>        - **bouncetime** : temps nécessaire pour stabiliser l'état du switch avant l'appel de la fonction callback.
+>>>           - int [0,oo[.<br>
+>>>           - L'unité est la milliseconde. Par défaut, sa valeur est fixée à 5O ms. <br>
+>>>           - **Réduire** cette valeur peut rendre le traitement de l'évènement instable.<br>
+>>>             En d'autres terme : une seule action peut aléatoirement appeler la fonction callback plusieurs fois.<br>
+>>>           - **L'augmentation** de cette valeur retarde l'appel de la fonction de callback.<br><br>
 >> </details>
 >>
 >> <details>
@@ -249,69 +249,70 @@ Ce package contient trois modules décrits ci-dessous :
 >> <br>
 >>
 >>>- **OBJECTIF**<br>
->>> - Le(s) switch(s) mentionné(s) dans le paramètre (switch_names) entraîneront :
->>> - La désactivation de chacune des pin (pin_code) associées à ces switchs.
->>> - Mise des pins dans un état électrique n'entraînant aucun risque de destruction de la carte Raspberry
->>> - Arrêter et détruire les threads concernés.
->>> - Après cette commande, toutes les actions sur les switchs concernés n'auront plus aucun effet..<br><br>
+>>>    - Le(s) switch(s) mentionné(s) dans le paramètre (switch_names) seront purgés, c'est à dire :<br>
+>>>         - La déaffectation des pin (pin_code) associées à ces switchs.
+>>>         - Mise des pins dans un état électrique n'entraînant aucun risque de destruction de la carte Raspberry
+>>>         - Arrêt et détruction les threads de surveillance de ces switchs
+>>>         - Après cette commande, toutes les actions sur les switchs concernés n'auront plus aucun effet.<br><br>
 >>>- **PARAMETRE**<br>
->>> - **switch_name** : Plusieurs écritures et types sont possibles.<br><br>
->>> - Si ce paramètre n'est pas spécifié, alors sa valeur par défaut sera **None**<br>
->>> Dans ce cas, les trois switchs **sw1**", "**sw2**" et "**sw3**" seront purgéss.<br>
->>> Après cette commande, toute action sur les switchs de la carte Maker-pHAT n'aura aucun effet.<br><br>
->>> - str **sw1**" ou "**sw2**" ou "**sw3**". Un seul nom de switch à la fois sera purgé.<br><br>
->>> - La liste ou le tuple ne doit contenir que les termes **"sw1"** et/ou **"sw2"** et/ou **"sw3"**<br>
->>> **Remarque**<br>
->>> - Ecrire [ "sw1", "sw2", "sw3" ] équivaut à ne pas saisir de valeur pour ce paramètre (cas None).<br>
->>> - L'ordre des noms de switchs dans la liste n'a pas d'importance.<br>
->>> - Une répétition accidentelle du nom d'un switch n'a aucune conséquence.<br>
->>> À la première occurrence du nom du switch, il sera purgé.<br><br>
+>>>    - **switch_name** : Plusieurs écritures et types sont possibles.<br>
+>>>         - Si ce paramètre n'est pas spécifié, alors sa valeur par défaut sera **None**<br>
+>>>           Dans ce cas, les trois switchs **sw1**", "**sw2**" et "**sw3**" seront purgés.<br>
+>>>         - str **sw1**" ou "**sw2**" ou "**sw3**". Seul le switch nommé sera purgé.<br>
+>>>         - list :  Elle ne doit contenir que les termes **"sw1"** et/ou **"sw2"** et/ou **"sw3"**<br>
+>>>           **Remarque**<br>
+>>>              - Ecrire [ "sw1", "sw2", "sw3" ] équivaut au cas None.<br>
+>>>              - L'ordre des noms de switchs dans la liste n'a pas d'importance.<br>
+>>>              - Une répétition accidentelle du nom d'un switch n'a aucune conséquence.<br>
+>>>                À la première occurrence du nom du switch, ce switch sera purgé.<br><br>
 >> </details>
 >>
 >> <details>
->> <summary><b>Details sur l'écriture des fonctions de callback</b> :</summary>
+>> <summary><b>Précisions sur l'écriture des fonctions de callback</b> :</summary>
 >> <br>
 >>
 >>> <details>
->>> <summary><b>Combien de formats sont autorisés ? :</b> :</summary>
+>>> <summary><b>Quels sont les formats autorisés ? :</b> :</summary>
 >>> <br>
 >>>
 >>>
 >>>> ```python
 >>>> # Premier format possible
 >>>> # args est un tuple qui ne contient qu'un seul élément.
->>>> # Cet élément est le code BCM du code PIN à l'origine de l'événement, et **args[0]** est la valeur de ce code PIN.
+>>>> # Cet élément est le pin_code de la pin à l'origine de l'événement, et args[0] est égale à pin_code.
 >>>> def your_function_name(*args) :
 >>>>     code_pin = arguments[0]
 >>>>     votre code
 >>>>
 >>>> # Deuxième format possible
->>>> # pin_code est le code BCM du pin provoquant l'événement
+>>>> # pin_code est le pin_code de la pin à l'origine de l'événement
 >>>>     def your_function_name (pin_code) :
->>>>     votre code
+>>>>         votre code
+>>>>
+>>>> # format INTERDIT
+>>>> # Absence de paramètre d'entrée, ce qui lèvera Error
+>>>>     def your_function_name () :
+>>>>         votre code
 >>>> ```
 >>> </details>
 >>>
 >>> <details>
 >>> <summary><b>Combien de fonctions callback devons-nous créer ? :</b> :</summary>
 >>> <br>
+>>>
+>>>> ``` python
+>>>> # LA SOLUTION : une fonction callback par switch
+>>>> # Par exemple sw1 et sw3, avec n'importe quel format d'entrée (ici on a mis les deux possibles)
 >>>>
->>>> ```python
->>>> # PREMIÈRE POSSIBLE
->>>> # Une fonction par switch que vous souhaitez surveiller, par exemple sw1 et sw3
->>>> # Dans ce cas, le paramètre d'entrée n'a pas d'importance puisqu'il est connu à l'avance, mais
->>>> # le format de ce paramètre doit être indiqué même s'il ne sera pas utilisé dans votre code
->>>>
->>>> def name_of_your_SW1_callback_function ( format d'entrée choisi) :
+>>>> def name_of_your_SW1_callback_function ( *arg ) :
 >>>>     votre code pour traiter le switch sw1
 >>>>
->>>> def name_of_your_SW3_callback_function ( format d'entrée choisi) :
+>>>> def name_of_your_SW3_callback_function ( pin_code) :
 >>>>     votre code pour traiter le switch sw3
 >>>> #---------------------------------------------- ---------------
 >>>>
->>>> # DEUXIÈME POSSIBILITÉ
->>>> # Une seule fonction commune à tous les interrupteurs.
->>>> # C'est votre code qui adaptera le traitement en fonction du paramètre de saisie, quel que soit son format
+>>>> # LA SOLUTION : une fonction callback commune
+>>>> # C'est votre code qui adaptera le traitement en fonction du paramètre d'entrée.
 >>>> def name_of_your_COMMON_callback_function(pin_code) :
 >>>>     si pin_code == PIN_CODE_SW1 :
 >>>>         votre code pour le switch sw1
@@ -321,9 +322,6 @@ Ce package contient trois modules décrits ci-dessous :
 >>>>
 >>>>     elif pin_code == PIN_CODE_SW3 :
 >>>>         votre code pour le switch sw3
->>>>
->>>>     else:
->>>>         votre code pour Erreur (normalement ce cas est impossible)
 >>>> ```
 >>> </details>
 >>>
@@ -331,68 +329,61 @@ Ce package contient trois modules décrits ci-dessous :
 >>> <summary><b>Comment traiter les événements dans le cas où trigger == GPIO.BOTH ? :</b> :</summary>
 >>> <br>
 >>>
->>>> Vous n'obtiendrez aucune information sur l'action sur le switch.<br>
->>>> S'agit-il d'une pression ou d'un relâchement de l'interrupteur ? Impossible de le savoir.<br>
->>>> Le paramètre d'entrée de votre fonction de rappel ne contiendra pas cette information, il contiendra uniquement le code PIN.
->>>> <br>
+>>>> L'appui ou le relachement d'un switch provoque l'appelle d'une fonction callback.<br>
+>>>> La fonction callback n'a que pour seulle information le **pin_code** à l'origine de l'évènement.<br>
+>>>> Si la fonction callback doit connaître l'état de la pin associée au switch pour adapter le bon traitement, elle doit appeler la méthode 
+>>>> **logical_state_pins (list_of_switch_name)**<br><br>
 >>>>
 >>>> ```python
 >>>>
 >>>> # CAS LE PLUS SIMPLE
->>>> # Peu importe que le déclenchement de l'appel soit dû à une action d'appui ou de relâchement sur l'interrupteur.
->>>> # Par exemple sur le switch sw1, et quel que soit le type d'événement déclencheur
+>>>> # Peu importe que le déclenchement de l'appel soit dû à un appui ou un relâchement sur le switch.
+>>>> # Par exemple sur le switch sw1
 >>>>
->>>> def name_of_your_BOTH_callback_function_on_SW1 (chosen_parameter_format) :
->>>> x.votre code pour le switch sw1
+>>>> def name_of_your_BOTH_callback_function_on_SW1 ( pin_code ) :
+>>>>    votre code pour le switch sw1
 >>>>
 >>>> #---------------------------------------------- ---------------
 >>>>
 >>>>
 >>>>
->>>> # CAS UN LÉGÈREMENT MOINS SIMPLE
->>>> # En fonction de l'état logique du switch vous sélectionnez le traitement prévu pour le type d'événement approprié
+>>>> # CAS LÉGÈREMENT MOINS SIMPLE
+>>>> # En fonction de l'état logique du switch vous sélectionnez
+>>>> #   le traitement prévu pour le type d'événement approprié
 >>>>
->>>> def name_of_your_BOTH_callback_function_on_SW1 (chosen_parameter_format) :
->>>> si x.logical_state_pins( 'sw1' ) == "ON" :
->>>> x.votre code pour l'interrupteur sw1 sur front DESCENDANT
+>>>> buttons = m_buttons.Bouttons()
 >>>>
->>>> elif x.logical_state_pins( 'sw1' ) == "OFF" :
->>>> x.votre code pour switch sw1 sur front MONTANT
+>>>> def name_of_your_BOTH_callback_function_on_SW1 ( pin_code ) :
+>>>>     if buttons.logical_state_pins( 'sw1' ) == "ON" :
+>>>>         votre code pour le switch sw1 sur front DESCENDANT 
 >>>>
->>>> else : # Aucun cas mais c'est impossible
->>>> réussir
+>>>>     elif buttons.logical_state_pins( 'sw1' ) == "OFF" :
+>>>>         votre code pour le switch sw1 sur front MONTANT
 >>>>
 >>>> #---------------------------------------------- ---------------
 >>>>
 >>>>
 >>>>
 >>>> # CAS PLUS COMPLEXE
->>>> # Vous devez utiliser deux fonctions de rappel
->>>> # -- Un pour l'action d'appuyer sur l'interrupteur.
->>>> # -- Un autre lorsque l'action disparaît.
->>>> # Le principe est que chaque fonction de rappel se désactive et active la fonction de rappel opposée.
->>>> # Ce sont deux fonctions miroir
+>>>> # Vous devez utiliser deux fonctions de callback
+>>>> # -- Une pour l'action d'appuyer sur le switch
+>>>> # -- Une autre lorsque l'action disparaît.
+>>>> # Chaque fonction de callback contient dans son code :
+>>>> #     - Sa propre désactivation
+>>>> #     - l'acitvation de l'évènement oposé.
+>>>> # Ce sont deux fonctions callback miroir
 >>>> #
->>>> # Exemple pour le switch sw3 (inst_button)
+>>>> # Exemple pour le switch sw3 
 >>>>
->>>> inst_buttons = boutons.Boutons()
+>>>> buttons = m_boutons.Boutons()
 >>>>
->>>> def name_of_your_FALLING_callback_function_SW3(pin_code) :
->>>> # vous désactivez la fonction de rappel traitant le déclencheur FALLING, et activez la fonction de rappel traitant le déclencheur RISING
->>>> # La classe Buttons vous permet de faire cela en une seule commande
->>>> inst_buttons.add_event_detect_switch( "sw3", GPIO.RISING, nom_de_votre_RISING_callback_function_SW3)
+>>>> def name_of_your_FALLING_callback_function_SW3( pin_code ) :
+>>>>     buttons.add_event_detect_switch( "sw3", GPIO.RISING, nom_de_votre_RISING_callback_function_SW3)
+>>>>     votre code spécifique pour l'événement FALLING commence ici ....
 >>>>
->>>> # votre code spécifique pour l'événement FALLING commence ici
->>>> votre code....
->>>>
->>>>
->>>> def name_of_your_RISING_callback_function_SW3(pin_code) :
->>>> # vous désactivez la fonction de rappel traitant le déclencheur RISING, et activez la fonction de rappel traitant le déclencheur FALLING
->>>> # La classe Buttons vous permet de faire cela en une seule commande
->>>> inst_buttons.add_event_detect_switch( "sw3", GPIO.FALLING, nom_de_votre_FALLING_callback_function_SW3)
->>>>
->>>> # votre code spécifique pour l'événement RISING commence ici
->>>> votre code....
+>>>> def name_of_your_RISING_callback_function_SW3( pin_code ) :
+>>>>     buttons.add_event_detect_switch( "sw3", GPIO.FALLING, nom_de_votre_FALLING_callback_function_SW3)
+>>>>     votre code spécifique pour l'événement RISING commence ici ....
 >>>> ```
 >>>> </details>
 >>>>
@@ -403,70 +394,70 @@ Ce package contient trois modules décrits ci-dessous :
 >>> <br>
 >>>
 >>>> ```python
->>>> mais = Boutons()
+>>>> buttons = m_buttons.Boutons()
 >>>>
 >>>> # Déclaration des fonctions de traitement d'événements (fonction de rappel)
 >>>> def test_button_sw1(*args) :
->>>> print(f"ici traitement sw1, args : {args}" )
+>>>>     print(f"ici traitement sw1, args : {args}" )
 >>>>
 >>>> def test_button_sw2(*args) :
->>>> print(f"ici traitement sw2, args[0] : {args[0]}" )
+>>>>     print(f"ici traitement sw2, args[0] : {args[0]}" )
 >>>>
 >>>> def test_button_sw3(pin_code) :
->>>> print(f"ici traitement sw3, pin_code : {pin_code}" )
+>>>>     print(f"ici traitement sw3, pin_code : {pin_code}" )
 >>>>
 >>>> def common_test_button_switch(pin_code) :
->>>> print(f"Traitement COMMON : Événement sur pin_code {pin_code}")
+>>>>     print(f"Traitement COMMON : Événement sur pin_code {pin_code}")
 >>>>
->>>> déf Rising_event_detected_on_sw1 (pin_code) :
->>>> buts.add_event_detect_switch("sw1", GPIO.FALLING, tombant_event_detected_on_sw1)
->>>> print(f"States : {buts.logical_state_pins('sw1')}")
->>>> print(f"rising_event : pin {pin_code}" )
+>>>> def rising_event_detected_on_sw1 (pin_code) :
+>>>>     buttons.add_event_detect_switch("sw1", GPIO.FALLING, falling_event_detected_on_sw1)
+>>>>     print(f"States : {buttons.logical_state_pins('sw1')}")
+>>>>     print(f"rising_event : pin {pin_code}" )
 >>>>
 >>>> def falling_event_detected_on_sw1(pin_code ):
->>>> buts.add_event_detect_switch("sw1", GPIO.RISING,ising_event_detected_on_sw1)
->>>> print(f"States : {buts.logical_state_pins('sw1')}")
->>>> print(f"falling_event : pin {pin_code}" )
+>>>>     buttons.add_event_detect_switch("sw1", GPIO.RISING,rising_event_detected_on_sw1)
+>>>>     print(f"States : {buttons.logical_state_pins('sw1')}")
+>>>>     print(f"falling_event : pin {pin_code}" )
 >>>>
 >>>>
 >>>>
->>>>    # Assignment of treads monitoring events occurring on each switch
->>>>    # Each switch has its own callback function.
->>>>    buts.add_event_detect_switch("sw1", GPIO.FALLING, test_button_sw1)
->>>>    buts.add_event_detect_switch("sw2", GPIO.RISING , test_button_sw2)
->>>>    buts.add_event_detect_switch("sw3", GPIO.BOTH   , test_button_sw3)
+>>>> # Affectation des thread surveillant les événements survenant sur chaque switch
+>>>> # Chaque switch a sa propre fonction de callback.
+>>>> buttons.add_event_detect_switch("sw1", GPIO.FALLING, test_button_sw1)
+>>>> buttons.add_event_detect_switch("sw2", GPIO.RISING , test_button_sw2)
+>>>> buttons.add_event_detect_switch("sw3", GPIO.BOTH   , test_button_sw3)
 >>>>
 >>>>
->>>>    print("\nYou can now push the button to test them FALLING, RISING, BOTH" )
->>>>    time.sleep(7)
+>>>> print("\nYou can now push the button to test them FALLING, RISING, BOTH" )
+>>>> time.sleep(7)
 >>>>
->>>>    # Reassign threads monitoring events occurring on each switch
->>>>    # All switches have the same callback function.
->>>>    buts.add_event_detect_switch("sw1", GPIO.FALLING, common_test_button_switch)
->>>>    buts.add_event_detect_switch("sw2", GPIO.RISING , common_test_button_switch)
->>>>    buts.add_event_detect_switch("sw3", GPIO.BOTH   , common_test_button_switch)
->>>>    print("\nYou can now push the button to test them with the same callback function")
->>>>    time.sleep(7)
+>>>> # Affectation des thread surveillant les événements survenant sur chaque switch
+>>>> # Les switchs ont tous la même fonction de callback.
+>>>> buttons.add_event_detect_switch("sw1", GPIO.FALLING, common_test_button_switch)
+>>>> buttons.add_event_detect_switch("sw2", GPIO.RISING , common_test_button_switch)
+>>>> buttons.add_event_detect_switch("sw3", GPIO.BOTH   , common_test_button_switch)
+>>>> print("\nYou can now push the button to test them with the same callback function")
+>>>> time.sleep(7)
 >>>>
->>>>    # Now we deactivate all switches
->>>>    print("\nCleanup all switch. Now no more reaction from the switches")
->>>>    print(f"states befor cleanup : {buts.logical_state_pins(buts.list_of_switch_names)}")
->>>>    buts.cleanup(  )
->>>>    print(f"states after cleanup : {buts.logical_state_pins(buts.list_of_switch_names)}")
->>>>    time.sleep(4)
+>>>> # Maintenant nous purgeons tous les switches
+>>>> print("\nCleanup all switch. Now no more reaction from the switches")
+>>>> print(f"states befor cleanup : {buttons.logical_state_pins()}")
+>>>> buttons.cleanup( )
+>>>> print(f"states after cleanup : {buttons.logical_state_pins()}")
+>>>> time.sleep(4)
 >>>>
->>>>    # Only callback function of sw1 is activated t_detect_switch/
->>>>    print("\nOnly switch SW1 is re-activated. with BOTH trigger. The callback function will be twice callet. Test  it" )
->>>>    print(f"States befor add_event_detect_switch : {buts.logical_state_pins(buts.list_of_switch_names)}")
->>>>    buts.add_event_detect_switch("sw1", GPIO.BOTH, test_button_sw1)
->>>>    print(f"States after add_event_detect_switch : {buts.logical_state_pins(buts.list_of_switch_names)}")
->>>>    time.sleep(4)
+>>>> # Nous créons une nouveau thread sur sw1
+>>>> print("\nOnly switch SW1 is re-activated. with BOTH trigger. The callback function will be twice callet. Test it" )
+>>>> print(f"States befor add_event_detect_switch : {buttons.logical_state_pins()}")
+>>>> buts.add_event_detect_switch("sw1", GPIO.BOTH, test_button_sw1)
+>>>> print(f"States after add_event_detect_switch : {buts.logical_state_pins()}")
+>>>> time.sleep(4)
 >>>>
->>>>    # To detect front up and front down
->>>>    buts.add_event_detect_switch("sw1", GPIO.FALLING, falling_event_detected_on_sw1)
->>>>    print("\nFinally we simulate the BOTH trigger with two callback functions on the sw1")
->>>>    time.sleep(7)
->>>>    print()
+>>>> # To detect front up and front down
+>>>> buts.add_event_detect_switch("sw1", GPIO.FALLING, falling_event_detected_on_sw1)
+>>>> print("\nFinally we simulate the BOTH trigger with two callback functions on the sw1")
+>>>> time.sleep(7)
+>>>> print()
 >>>>
 >>>>  ```
 >>>  </details>
@@ -550,4 +541,5 @@ Assurez-vous de mettre à jour les tests le cas échéant.<br>
 ## Licence
 
 [MIT](https://choosealicense.com/licenses/mit/
+
 
