@@ -41,13 +41,13 @@ Exemple de montages sur modules Raspberry Pi 3B+ ou Pi Zero.<br><br>
 
 </details>
 
-## Utiliser
+## Utilisation du package
 
 Ce package contient trois modules décrits ci-dessous :
 <br>**Remarque** : le nom des modules est préfixé par "**m_**" signifiant **module**.
 
 <details>
-<summary><b>Module : m_leds.</b> Il est chargé de gérer les 8 LED de la carte Maker-pHAT</summary><br>
+<summary><b>Module : m_leds.</b> Il gère uniquement les 8 LED de la carte Maker-pHAT</summary><br>
 
 > <details>
 > <summary><b>Méthodes</b> :</summary><br>
@@ -55,83 +55,83 @@ Ce package contient trois modules décrits ci-dessous :
 >> <details>
 >> <summary><b>flash( led_n , tempo = 1.0 )</b></summary><br>
 >>
->>>- **AIM** : La LED concernée s'allume <b>ON</b>, puis <b>tempo</b> secondes plus tard la LED s'etteind. <br><br>
->>>- **PARAMETRE** :
->>> - **led_n** : indice des LED.
->>> - entier [0, 7]
->>> - led_n = 0 pour la LED à l'extrême droite de la carte Maker-pHAT.
->>> - led_n = 7 pour la LED à l'extrême gauche de la carte Maker-pHAT.<br><br>
->>> - **tempo** : float, ]0, oo[
->>> - Temps (en secondes) pendant lequel la Led 'led_n' sera **ON**. Passé ce délai, elle  passe à l'état **OFF**.<br>
->>> Par défaut **tempo** = 1,0 seconde<br><br>
+>>>- **BUT** : La LED identifiée par <b>led_n</b> s'allume, puis <b>tempo</b> secondes plus tard la LED s'etteind. <br><br>
+>>>- **PARAMETRES** :
+>>>    - **led_n** : indice des LED.
+>>>       - **int** dans l'ensemble [0, 7]
+>>>       - led_n = 0 correspond à la LED à l'extrême droite de la carte Maker-pHAT.
+>>>       - led_n = 7 correspond à  la LED à l'extrême gauche de la carte Maker-pHAT.<br><br>
+>>>    - **tempo** : Temps (en secondes) pendant lequel la Led d'indice **led_n** sera **allumée**. Passé ce délai, La led s'éteind.<br>
+>>>       - float, ]0, oo[
+>>>       - Par défaut **tempo** = 1,0 seconde<br><br>
 >> </details>
 >>
 >> <details>
 >> <summary><b>flash_mask(mask = 0xFF, tempo = 1.0)</b></summary><br>
 >>
->>>- **AIM** : La ou les LED concernées s'allument, puis une fois le tempo écoulée, les mêmes LED s'éteignent.<br><br>
+>>>- **BUT** : La ou les LED sélectionnées par le **mask** s'allument, puis une fois le tempo écoulée, les mêmes LED s'éteignent.<br><br>
 >>>- **PARAMETRE** :
->>> - **mask** : masque de 8 bits, chaque bit est associé à une LED.
->>> - **int** [0x00, 0xFF]
->>> - mask = 0x01 est associé à la LED située à l'extrême droite de la carte Maker-pHAT.
->>> - mask = 0x80 est associé à la LED située à l'extrême gauche de la carte Maker-pHAT.
->>> - mask = 0b01010101 = 0x55 est associé aux LEDS d'index {6, 4, 2, 0}
->>> - mask = 0xFF est associé aux LEDS  d'index {7, 6, 5, 4, 3, 2, 1, 0}<br><br>
->>> - **tempo** : **float**, ]0, oo[
->>> - Temps (en secondes) pendant lequel la ou les  Led seront **ON**. Passé ce délai, elles passeront à l'état **OFF**.<br>
->>> Par défaut **tempo** = 1,0 seconde<br><br>
+>>>    - **mask** : masque de 8 bits, chaque bit est associé à une LED.
+>>>       - **int** dans l'ensemble [0x00, 0xFF]
+>>>       - mask = 0x01 est associé à la LED située à l'extrême droite de la carte Maker-pHAT.
+>>>       - mask = 0x80 est associé à la LED située à l'extrême gauche de la carte Maker-pHAT.
+>>>       - mask = 0b01010101 = 0x55 est associé aux LEDS d'index {6, 4, 2, 0}
+>>>       - mask = 0xFF est associé aux LEDS  d'index {7, 6, 5, 4, 3, 2, 1, 0}<br><br>
+>>>    - **tempo** : Temps (en secondes) pendant lequel la ou les Led seront allumées. Passé ce délai, elles s'éteindront.<br>
+>>>       - **float**, ]0, oo[
+>>>       - Par défaut **tempo** = 1,0 seconde<br><br>
 >> </details>
 >>
 >> <details>
 >> <summary><b>set_on_leds(mask = 0x00)</b></summary><br>
 >>
->>>- **AIM** : La ou les LED concernées s'allument **ON**.</b></b>
+>>>- **BUT** : La ou les LED sélectionnées par le **mask** s'allument, et reste allumées.</br></br>
 >>>- **PARAMETRE** :
->>> - **mask** : masque de 8 bits, chaque bit est associé à une LED.
->>> - **int** [0x00, 0xFF]
->>> - mask = 0x01 est associé à la LED située à l'extrême droite de la carte Maker-pHAT.
->>> - mask = 0x80 est associé à la LED située à l'extrême gauche de la carte Maker-pHAT.
->>> - mask = 0b01010101 = 0x55 est associé aux LEDS d'index {6, 4, 2, 0}
->>> - mask = 0xFF est associé aux LEDS d'index {7, 6, 5, 4, 3, 2, 1, 0}<br><br>
->>> - **REMARQUE 1** : si masque = 0x00 alors l'état des 8 LED ne sera pas modifié.
->>> - **REMARQUE 2** : si une LED affectée par le masque est à l'état **ON**, alors l'état reste à **ON**.
+>>>    - **mask** : masque de 8 bits, chaque bit est associé à une LED.
+>>>       - **int** [0x00, 0xFF]
+>>>       - mask = 0x01 est associé à la LED située à l'extrême droite de la carte Maker-pHAT.
+>>>       - mask = 0x80 est associé à la LED située à l'extrême gauche de la carte Maker-pHAT.
+>>>       - mask = 0b01010101 = 0x55 est associé aux LEDS d'index {6, 4, 2, 0}
+>>>       - mask = 0xFF est associé aux LEDS d'index {7, 6, 5, 4, 3, 2, 1, 0}<br><br>
+>>>       - **REMARQUE 1** : si masque = 0x00 alors l'état des 8 LED ne sera pas modifié.
+>>>       - **REMARQUE 2** : si une LED sélectionnée par le masque est déjà allumée, alors elle reste allumée.<br>
 >> </details>
 >>
 >> <details>
 >> <summary><b>set_off_leds(mask = 0x00)</b></summary><br>
 >>
->>>- **AIM** : La ou les LED concernées s'éteignent **OFF**.</b></b>
+>>>- **BUT** : La ou les LED sélectionnées par le **mask** s'éteignent, et reste éteintes</br></br>
 >>>- **PARAMETRE** :
->>> - **mask** : masque de 8 bits, chaque bit est associé à une LED.
->>> - **int** [0x00, 0xFF]
->>> - mask = 0x01 est associé à la LED située à l'extrême droite de la carte Maker-pHAT.
->>> - mask = 0x80 est associé à la LED située à l'extrême gauche de la carte Maker-pHAT.
->>> - mask = 0b01010101 = 0x55 est associé aux LEDS d'index {6, 4, 2, 0}
->>> - mask = 0xFF est associé aux LEDS d'index {7, 6, 5, 4, 3, 2, 1, 0}<br><br>
->>> - **REMARQUE 1** : si mask = 0x00 alors l'état des 8 LED ne sera pas modifié.
->>> - **REMARQUE 2** : si une LED affectée par le masque est à l'état **OFF**, alors l'état reste à **OFF**.
+>>>    - **mask** : masque de 8 bits, chaque bit est associé à une LED.
+>>>       - **int** [0x00, 0xFF]
+>>>       - mask = 0x01 est associé à la LED située à l'extrême droite de la carte Maker-pHAT.
+>>>       - mask = 0x80 est associé à la LED située à l'extrême gauche de la carte Maker-pHAT.
+>>>       - mask = 0b01010101 = 0x55 est associé aux LEDS d'index {6, 4, 2, 0}
+>>>       - mask = 0xFF est associé aux LEDS d'index {7, 6, 5, 4, 3, 2, 1, 0}<br><br>
+>>>       - **REMARQUE 1** : si masque = 0x00 alors l'état des 8 LED ne sera pas modifié.
+>>>       - **REMARQUE 2** : si une LED sélectionnée par le masque est déjà éteinte, alors elle reste éteinte<br>
 >> </details>
 >>
 >> <details>
 >> <summary><b>Exemple de code</b></summary><br>
 >>
 >>> ```python
->>> depuis rasp_maker_phat importer m_leds en tant que LED
+>>> from rasp_maker_phat import m_leds
 >>>
->>> # Instanciation de classe
->>> leds = leds.Leds()
+>>> # Instanciation
+>>> leds = m_leds.Leds()
 >>>
->>> # Allume la Led n°2 pendant une seconde (par défaut) puis s'éteind.
+>>> # Allume la Led n°2 pendant une seconde (par défaut) puis l'éteind.
 >>> leds.flash( 2 )
->>> # Allume la Led n°5 pendant 0,3 seconde puis s'éteind.
+>>> # Allume la Led n°5 pendant 0,3 seconde puis l'éteind.
 >>> leds.flash( 5, 0.3 )
 >>>
->>> # Éteignez toutes les LED puis allumez uniquement les LED d'index impair.
+>>> # Etteind toutes les LED, puis allume uniquement les LEDs d'index impair.
 >>> leds.set_off_leds(x0FF)
 >>> leds.set_on_leds(x055)
 >>>
 >>> # On commence par eteindre toutes les LEDs
->>> # Puis, on allume toutes les LED paires pendant  1,5 seconde
+>>> # Puis, on allume toutes les LEDs paires pendant  1,5 seconde
 >>> # Puis, on allume toutes les LED impaires pendant  2,6 secondes
 >>> leds.set_off_leds(x0FF)
 >>> leds.flash_mask( x055, 1.5 )
@@ -144,16 +144,16 @@ Ce package contient trois modules décrits ci-dessous :
 </details>
 
 <details>
-<summary><b>Module : m_buttons.</b> Il gère les 3 boutons poussoirs (switch) de la carte Maker-pHAT.</summary><br>
+<summary><b>Module : m_buttons.</b> Il gère uniquement les 3 boutons poussoirs (switch) de la carte Maker-pHAT.</summary><br>
 
 > <details>
 > <summary><b>Getters</b> :</summary>
 > <br>
 >
 >>- **list_of_switch_pins**<br>
->> renvoie la liste des pin_code BCM des 3 pins associées aux 3  switchs dont les noms sont sérigraphiés de la carte Maker_pHAT.<br>
+>> renvoie la liste des trois **pin_code BCM** associées aux 3 switchs.<br>
 >>- **list_of_switch_names**<br>
->> renvoie la liste des noms des switchs qui sont sérigraphiés sur la carte maker-pHAT.<br>
+>> renvoie la liste des trois **switch_name** qui sont sérigraphiés sur la carte maker-pHAT.<br>
 >>- **dico_switch_name_to_pin_code**<br>
 >> renvoie le dictionnaire des couples (switch_name, pin_code) où switch_name est la clé.<br>
 >>- **dico_pin_code_to_switch_name**<br>
@@ -166,44 +166,51 @@ Ce package contient trois modules décrits ci-dessous :
 >> <details>
 >> <summary><b>logical_state_pins (list_of_switch_name)</b> :</summary><br>
 >>
->>>- **OBJECTIF**<br>
->>> Renvoie l'état logique des trois switchs sous la forme d'un dictionnaire de trois paires **<Clé, valeur>**.<br>
->>> Où **Key** est le nom du switch et **valeur** est l'**état logique de la broche** associée au switch.<br>
->>> Le dictionnaire contient autant de paires que de noms de switchs valides,et différents qui sont demandés dans le paramètre d'entrée.<br><br>
+>>>- **BUT**<br>
+>>>    - L'état logique des switchs demandés dans le parametre d'entrée **liste_of_switch_name** est retouné.<br>
+>>>    - Le résultat est sous la forme d'un dictionnaire de paires **<Clé, valeur>**.<br>
+>>>        - **Key** est le nom du switch
+>>>        - **valeur** est l'**état logique du pin_code** associée au switch.<br>
+>>>        - Le dictionnaire contient autant de paires que de switch_name valides,et distincts contenus dans la liste d'entrée.<br><br>
 >>>- **PARAMÈTRE**
->>> - **list_of_switch_name** :
->>> - Quels sont les types de données autorisés ou interdits pour le paramètre d'entrée.<br>
->>> - SI c'est un **str** : Dans ce cas, un seul nom de switch est autorisé. Il s'agira alors soit de **"sw1"**, soit de **"sw2"**, soit de **"sw3"**..<br>
->>> - SI c'est un **tuple** : **NON AUTORISÉ**.<br>
->>> - SI c'est une **list** : Dans ce cas cette liste doit contenir un ou plusieurs noms de switch parmi : **"sw1"** et/ou **"sw2"** et/ou **"sw3" **.<br>
->>> L'ordre n'a pas d'importance et la répétition accidentelle d'un nom n'a aucune conséquence..<br><br>
->>> - **Rappel** : <br>
->>> - Soyez prudent lorsque vous utilisez l'instruction print.<br>
->>> N'oubliez pas d'alterner entre guillemets doubles et guillemets simples.<br>
->>> ```
->>> print( f"les états sont { x.logical_state_pins( ['sw1', 'sw3'] ) } " )
->>> print( les états f sont { x.logical_state_pins( ["sw1", "sw3"] ) } ' )
+>>>    - **list_of_switch_name** :
+>>>        - Quels sont les types de données autorisés ou interdits pour le paramètre d'entrée.<br>
+>>>           - SI c'est un **str** : Dans ce cas, un seul nom de switch est autorisé.<br>
+>>>             Il s'agira alors soit de **"sw1"**, soit de **"sw2"**, soit de **"sw3"**..<br>
+>>>           - SI c'est un **tuple** : **NON AUTORISÉ**.<br>
+>>>           - SI c'est une **list** : Dans ce cas cette liste doit contenir un ou plusieurs switch_name parmi : <br>**"sw1"** et/ou **"sw2"** et/ou **"sw3"**.<br>
+>>>             L'ordre n'a pas d'importance et la répétition accidentelle d'un nom n'a aucune conséquence..<br><br>
+>>>    - exemples de syntaxe autorisée
+>>> ``` python
+>>> buttons = m_button.Button()
+>>> buttons.logical_state_pins( "sw1" ) 
+>>> buttons.logical_state_pins( "sw2" ) 
+>>> buttons.logical_state_pins( ["sw3"] ) 
+>>> buttons.logical_state_pins( ["sw1", "sw2", "sw3"] ) 
 >>> ```
 >>> - **Attention** : <br>
->>> - Si le nom du switch ne figure pas parmi **"sw1"** ou **"sw2"** ou **"sw3"** Alors une **KeyError** sera levée.<br>
->>> L'interception et le traitement de cette erreur relèvent de la responsabilité de l'utilisateur.<br><br>
+>>>    - Si le nom du switch ne figure pas parmi **"sw1"** ou **"sw2"** ou **"sw3"** Alors une **KeyError** sera levée.<br>
+>>>      L'interception et le traitement de cette erreur relèvent de la responsabilité de l'utilisateur.<br><br>
 >>>- **RETOUR**<br>
->>> - L'état logique d'une broche prend trois formes
->>> - str **"ON"** qui signifie *le switch est à l'état enfoncé*.<br>
->>> - str **OFF"** qui signifie *le switch est à l'état relâché*.<br>
->>> - **None** ce qui signifie que *le switch n'a pas été initialisé*, la requête n'a aucun sens.<br><br>
->>> - exemples de syntaxe autorisée
->>>
->>> - l'entrée est une str.<br>
+>>>    - L'état logique d'une pin sera représenté sous trois formes :
+>>>        - str **"ON"** qui signifie *le switch est à l'état enfoncé*.<br>
+>>>        - str **"OFF"** qui signifie *le switch est à l'état relâché*.<br>
+>>>        - **None** ce qui signifie que *la pin associée au switch n'a pas été initialisé*, la requête n'a aucun sens.<br><br>
+>>>    - exemples de retour<br>
+>>> ``` python
+>>> { "sw1": "ON" }
+>>> { "sw2": None }
+>>> { "sw3":"OFF" }
+>>> { "sw1": "ON", "sw2": None, "sw3": "OFF" }
 >>> ```
->>> logical_state_pins( "sw1" ) --> { "sw1": "ON" }
->>> logical_state_pins( "sw2" ) --> { "sw2": None }
->>> ```
->>> - l'entrée est une liste.
->>> ```
->>> logical_state_pins( ["sw3"] ) --> { "sw3":"OFF" }
->>> logical_state_pins( ["sw1", "sw2", "sw3"] ) --> { "sw1": "ON", "sw2": none, "sw3": "OFF" }
->>> ```
+>>> - **Rappel** : <br>
+>>>    - Soyez prudent lorsque vous utilisez cette méthode avec l'instruction print.<br>
+>>>      N'oubliez pas d'alterner les guillemets doubles et les guillemets simples.<br>
+>>> ``` python
+>>> buttons = m_button.Button()
+>>> print( f"les états sont { buttons.logical_state_pins( ['sw1', 'sw3'] ) } " ) # " ' ' " 
+>>> print( f'les états sont { buttons.logical_state_pins( ["sw1", "sw3"] ) } ' ) # ' " " '
+>>> ```   
 >> </details>
 >>
 >> <details>
@@ -543,3 +550,4 @@ Assurez-vous de mettre à jour les tests le cas échéant.<br>
 ## Licence
 
 [MIT](https://choosealicense.com/licenses/mit/
+
