@@ -4,7 +4,7 @@
 
 ### Que fait ce package ?
 <details>
-<summary>Le package <b>rasp_maker_phat</b> contient tous les modules Python nécessaires à la gestion de la carte chapeau <b>MAKER-pHAT</b>.<br>Cette carte est fabriquée par la société Cytron (https:/ /www.cytron.io)</summary><br>
+<summary>Le package <b>rasp_maker_phat</b> contient tous les modules Python nécessaires à la gestion de la carte chapeau <b>MAKER-pHAT</b>.<br>Cette carte est fabriquée par la société Cytron (https://www.cytron.io)</summary><br>
    
 Exemple de montages sur modules Raspberry Pi 3B+ ou Pi Zero.<br><br>
 
@@ -33,7 +33,7 @@ Exemple de montages sur modules Raspberry Pi 3B+ ou Pi Zero.<br><br>
      Il peut également être alimenté par le BUS 5V du module Raspberry Pi.
 
   <br><br>
-**Pour plus d'informations, consulter le site du fabricant** [CyTRON](https://www.cytron.io/c-raspberry-pi-hat#/-c616/cytron-m11/sort=p.number_sales/order= DESC/limit=20/minPrice=/maxPrice=)<br><br>
+**Pour plus d'informations, consulter le site du fabricant** [CyTRON](https://www.cytron.io/c-raspberry-pi-hat#/-c616/cytron-m11/sort=p.number_sales/order=DESC/limit=20/minPrice=/maxPrice=)<br><br>>
 
 
 ![](/Documents/EN_Maker-pHAT_Overview.png)
@@ -55,60 +55,60 @@ Ce package contient trois modules décrits ci-dessous :
 >> <details>
 >> <summary><b>flash( led_n , tempo = 1.0 )</b></summary><br>
 >>
->>>- **AIM** : La LED concernée passe à l'état <b>ON</b>, puis <b>tempo</b> seconde plus tard passe à l'état <b>OFF</b>. <br><br>
+>>>- **AIM** : La LED concernée s'allume <b>ON</b>, puis <b>tempo</b> secondes plus tard la LED s'etteind. <br><br>
 >>>- **PARAMETRE** :
 >>> - **led_n** : indice des LED.
 >>> - entier [0, 7]
 >>> - led_n = 0 pour la LED à l'extrême droite de la carte Maker-pHAT.
 >>> - led_n = 7 pour la LED à l'extrême gauche de la carte Maker-pHAT.<br><br>
 >>> - **tempo** : float, ]0, oo[
->>> - Temps (en secondes) pendant lequel la Led 'n' sera **ON**. Passé ce délai, il passe à l'état **OFF**.<br>
->>> Par défaut **tempo** = 1,0 secondes<br><br>
+>>> - Temps (en secondes) pendant lequel la Led 'led_n' sera **ON**. Passé ce délai, elle  passe à l'état **OFF**.<br>
+>>> Par défaut **tempo** = 1,0 seconde<br><br>
 >> </details>
 >>
 >> <details>
 >> <summary><b>flash_mask(mask = 0xFF, tempo = 1.0)</b></summary><br>
 >>
->>>- **AIM** : La ou les LED concernées s'allument **ON** , puis une fois le tempo écoulé, les mêmes LED s'activent **OFF**<br><br>
+>>>- **AIM** : La ou les LED concernées s'allument, puis une fois le tempo écoulée, les mêmes LED s'éteignent.<br><br>
 >>>- **PARAMETRE** :
->>> - **masque** : masque 8 bits, chaque bit est associé à une LED.
->>> - entier [0x00, 0xFF]
+>>> - **mask** : masque de 8 bits, chaque bit est associé à une LED.
+>>> - **int** [0x00, 0xFF]
 >>> - mask = 0x01 est associé à la LED située à l'extrême droite de la carte Maker-pHAT.
 >>> - mask = 0x80 est associé à la LED située à l'extrême gauche de la carte Maker-pHAT.
->>> - mask = 0b01010101 = 0x55 est associé à l'index LEDS {6, 4, 2, 0}
->>> - masque = 0xFF est associé à l'index LEDS {7, 6, 5, 4, 3, 2, 1, 0}<br><br>
->>> - **tempo** : float, ]0, oo[
->>> - Temps (en secondes) pendant lequel la Led 'n' sera **ON**. Passé ce délai, il passe à l'état **OFF**.<br>
+>>> - mask = 0b01010101 = 0x55 est associé aux LEDS d'index {6, 4, 2, 0}
+>>> - mask = 0xFF est associé aux LEDS  d'index {7, 6, 5, 4, 3, 2, 1, 0}<br><br>
+>>> - **tempo** : **float**, ]0, oo[
+>>> - Temps (en secondes) pendant lequel la ou les  Led seront **ON**. Passé ce délai, elles passeront à l'état **OFF**.<br>
 >>> Par défaut **tempo** = 1,0 seconde<br><br>
 >> </details>
 >>
 >> <details>
->> <summary><b>set_on_leds(masque = 0x00)</b></summary><br>
+>> <summary><b>set_on_leds(mask = 0x00)</b></summary><br>
 >>
 >>>- **AIM** : La ou les LED concernées s'allument **ON**.</b></b>
 >>>- **PARAMETRE** :
->>> - **masque** : masque 8 bits, chaque bit est associé à une LED.
->>> - entier [0x00, 0xFF]
+>>> - **mask** : masque de 8 bits, chaque bit est associé à une LED.
+>>> - **int** [0x00, 0xFF]
 >>> - mask = 0x01 est associé à la LED située à l'extrême droite de la carte Maker-pHAT.
 >>> - mask = 0x80 est associé à la LED située à l'extrême gauche de la carte Maker-pHAT.
->>> - mask = 0b01010101 = 0x55 est associé à l'index LEDS {6, 4, 2, 0}
->>> - masque = 0xFF est associé à l'index LEDS {7, 6, 5, 4, 3, 2, 1, 0}<br><br>
+>>> - mask = 0b01010101 = 0x55 est associé aux LEDS d'index {6, 4, 2, 0}
+>>> - mask = 0xFF est associé aux LEDS d'index {7, 6, 5, 4, 3, 2, 1, 0}<br><br>
 >>> - **REMARQUE 1** : si masque = 0x00 alors l'état des 8 LED ne sera pas modifié.
 >>> - **REMARQUE 2** : si une LED affectée par le masque est à l'état **ON**, alors l'état reste à **ON**.
 >> </details>
 >>
 >> <details>
->> <summary><b>set_off_leds(masque = 0x00)</b></summary><br>
+>> <summary><b>set_off_leds(mask = 0x00)</b></summary><br>
 >>
 >>>- **AIM** : La ou les LED concernées s'éteignent **OFF**.</b></b>
 >>>- **PARAMETRE** :
->>> - **masque** : masque 8 bits, chaque bit est associé à une LED.
->>> - entier [0x00, 0xFF]
+>>> - **mask** : masque de 8 bits, chaque bit est associé à une LED.
+>>> - **int** [0x00, 0xFF]
 >>> - mask = 0x01 est associé à la LED située à l'extrême droite de la carte Maker-pHAT.
 >>> - mask = 0x80 est associé à la LED située à l'extrême gauche de la carte Maker-pHAT.
->>> - mask = 0b01010101 = 0x55 est associé à l'index LEDS {6, 4, 2, 0}
->>> - masque = 0xFF est associé à l'index LEDS {7, 6, 5, 4, 3, 2, 1, 0}<br><br>
->>> - **REMARQUE 1** : si masque = 0x00 alors l'état des 8 LED ne sera pas modifié.
+>>> - mask = 0b01010101 = 0x55 est associé aux LEDS d'index {6, 4, 2, 0}
+>>> - mask = 0xFF est associé aux LEDS d'index {7, 6, 5, 4, 3, 2, 1, 0}<br><br>
+>>> - **REMARQUE 1** : si mask = 0x00 alors l'état des 8 LED ne sera pas modifié.
 >>> - **REMARQUE 2** : si une LED affectée par le masque est à l'état **OFF**, alors l'état reste à **OFF**.
 >> </details>
 >>
@@ -121,19 +121,21 @@ Ce package contient trois modules décrits ci-dessous :
 >>> # Instanciation de classe
 >>> leds = leds.Leds()
 >>>
->>> # Allume la Led n°2 pendant une seconde (par défaut) puis allume la Led n°5 pendant 0,3 seconde.
+>>> # Allume la Led n°2 pendant une seconde (par défaut) puis s'éteind.
 >>> leds.flash( 2 )
->>> leds.flash( 2, 0.3 )
+>>> # Allume la Led n°5 pendant 0,3 seconde puis s'éteind.
+>>> leds.flash( 5, 0.3 )
 >>>
 >>> # Éteignez toutes les LED puis allumez uniquement les LED d'index impair.
 >>> leds.set_off_leds(x0FF)
 >>> leds.set_on_leds(x055)
 >>>
->>> # Éteignez toutes les LED, puis allumez toutes les LED impaires pendant 1,5 seconde
->>> # puis allumez toutes les LED paires pendant 2,6 secondes
+>>> # On commence par eteindre toutes les LEDs
+>>> # Puis, on allume toutes les LED paires pendant  1,5 seconde
+>>> # Puis, on allume toutes les LED impaires pendant  2,6 secondes
 >>> leds.set_off_leds(x0FF)
 >>> leds.flash_mask( x055, 1.5 )
->>> leds.flash_mask(x0AA, 2.6)
+>>> leds.flash_mask( x0AA, 2.6 )
 >>> ```
 >> </details>
 >>
@@ -142,16 +144,16 @@ Ce package contient trois modules décrits ci-dessous :
 </details>
 
 <details>
-<summary><b>Module : m_buttons.</b> Il est chargé de gérer les 3 boutons poussoirs de la carte Maker-pHAT.</summary><br>
+<summary><b>Module : m_buttons.</b> Il gère les 3 boutons poussoirs (switch) de la carte Maker-pHAT.</summary><br>
 
 > <details>
 > <summary><b>Getters</b> :</summary>
 > <br>
 >
 >>- **list_of_switch_pins**<br>
->> renvoie la liste des références BCM des 3 pins associées aux noms des 3 switchs sérigraphiés de la carte Maker_pHAT.<br>
+>> renvoie la liste des pin_code BCM des 3 pins associées aux 3  switchs dont les noms sont sérigraphiés de la carte Maker_pHAT.<br>
 >>- **list_of_switch_names**<br>
->> renvoie la liste des noms de commutateurs qui sont sérigraphiés sur la carte maker-pHAT.<br>
+>> renvoie la liste des noms des switchs qui sont sérigraphiés sur la carte maker-pHAT.<br>
 >>- **dico_switch_name_to_pin_code**<br>
 >> renvoie le dictionnaire des couples (switch_name, pin_code) où switch_name est la clé.<br>
 >>- **dico_pin_code_to_switch_name**<br>
@@ -166,14 +168,14 @@ Ce package contient trois modules décrits ci-dessous :
 >>
 >>>- **OBJECTIF**<br>
 >>> Renvoie l'état logique des trois switchs sous la forme d'un dictionnaire de trois paires **<Clé, valeur>**.<br>
->>> Où **Key** est le nom du commutateur et **value** est l'**état logique de la broche** associée au commutateur.<br>
->>> Le dictionnaire contient autant de paires que de noms de commutateurs valides et différents demandés dans le paramètre d'entrée.<br><br>
+>>> Où **Key** est le nom du switch et **valeur** est l'**état logique de la broche** associée au switch.<br>
+>>> Le dictionnaire contient autant de paires que de noms de switchs valides,et différents qui sont demandés dans le paramètre d'entrée.<br><br>
 >>>- **PARAMÈTRE**
 >>> - **list_of_switch_name** :
->>> - Quels types de données sont autorisés ou interdits pour le paramètre d'entrée.<br>
->>> - is **str** : Dans ce cas, un seul nom de commutateur est autorisé. Il s'agira alors soit de **"sw1"**, soit de **"sw2"**, soit de **"sw3"**..<br>
->>> - est un **tuple** : **NON AUTORISÉ**.<br>
->>> - is **list** : Dans ce cas cette liste doit contenir un ou plusieurs noms de switch parmi : **"sw1"** et/ou **"sw2"** et/ou **"sw3" **.<br>
+>>> - Quels sont les types de données autorisés ou interdits pour le paramètre d'entrée.<br>
+>>> - SI c'est un **str** : Dans ce cas, un seul nom de switch est autorisé. Il s'agira alors soit de **"sw1"**, soit de **"sw2"**, soit de **"sw3"**..<br>
+>>> - SI c'est un **tuple** : **NON AUTORISÉ**.<br>
+>>> - SI c'est une **list** : Dans ce cas cette liste doit contenir un ou plusieurs noms de switch parmi : **"sw1"** et/ou **"sw2"** et/ou **"sw3" **.<br>
 >>> L'ordre n'a pas d'importance et la répétition accidentelle d'un nom n'a aucune conséquence..<br><br>
 >>> - **Rappel** : <br>
 >>> - Soyez prudent lorsque vous utilisez l'instruction print.<br>
@@ -183,24 +185,24 @@ Ce package contient trois modules décrits ci-dessous :
 >>> print( les états f sont { x.logical_state_pins( ["sw1", "sw3"] ) } ' )
 >>> ```
 >>> - **Attention** : <br>
->>> - Si le nom du commutateur ne figure pas parmi **"sw1"** ou **"sw2"** ou **"sw3"** Alors une **KeyError** sera levée.<br>
+>>> - Si le nom du switch ne figure pas parmi **"sw1"** ou **"sw2"** ou **"sw3"** Alors une **KeyError** sera levée.<br>
 >>> L'interception et le traitement de cette erreur relèvent de la responsabilité de l'utilisateur.<br><br>
 >>>- **RETOUR**<br>
 >>> - L'état logique d'une broche prend trois formes
->>> - Chaîne **"ON"** qui signifie *l'interrupteur est à l'état enfoncé*.<br>
->>> - Chaîne **"OFF"** qui signifie *le commutateur est à l'état relâché*.<br>
->>> - **Aucun** ce qui signifie que *le switch n'a pas été initialisé*, la requête n'a aucun sens.<br><br>
+>>> - str **"ON"** qui signifie *le switch est à l'état enfoncé*.<br>
+>>> - str **OFF"** qui signifie *le switch est à l'état relâché*.<br>
+>>> - **None** ce qui signifie que *le switch n'a pas été initialisé*, la requête n'a aucun sens.<br><br>
 >>> - exemples de syntaxe autorisée
 >>>
->>> - l'entrée est une chaîne.<br>
+>>> - l'entrée est une str.<br>
 >>> ```
 >>> logical_state_pins( "sw1" ) --> { "sw1": "ON" }
->>> logical_state_pins( "sw2" ) --> { "sw2": Aucun }
+>>> logical_state_pins( "sw2" ) --> { "sw2": None }
 >>> ```
 >>> - l'entrée est une liste.
 >>> ```
 >>> logical_state_pins( ["sw3"] ) --> { "sw3":"OFF" }
->>> logical_state_pins( ["sw1", "sw2", "sw3"] ) --> { "sw1": "ON", "sw2": Aucun, "sw3": "OFF" }
+>>> logical_state_pins( ["sw1", "sw2", "sw3"] ) --> { "sw1": "ON", "sw2": none, "sw3": "OFF" }
 >>> ```
 >> </details>
 >>
@@ -208,7 +210,7 @@ Ce package contient trois modules décrits ci-dessous :
 >> <summary><b>add_event_detect_switch (switch_name, trigger = GPIO.FALLING, callback = vide, temps de rebond = 50)</b> :</summary><br>
 >>
 >>>- **OBJECTIF**<br>
->>> Crée un fil de discussion qui surveille les actions effectuées sur le commutateur (**switch_name**) de la carte Maker-pHat.<br>
+>>> Crée un thread qui surveille les actions effectuées sur le switch (**switch_name**) de la carte Maker-pHat.<br>
 >>> L'action (**trigger**) consistera à appuyer ou à relâcher ou les deux.<br>
 >>> Dès que l'action apparaît, le thread appellera la fonction (**callback**) qui traitera l'action sur le switch.<br><br>
 >>>- **PARAMÈTRES**
@@ -219,72 +221,72 @@ Ce package contient trois modules décrits ci-dessous :
 >>> - Toutes les actions sur un interrupteur déclencheront un traitement soit sur le front montant du signal, soit sur le front descendant, ou les deux.<br>
 >>> Dans ce dernier cas le traitement sera déclenché deux fois.<br><br>
 >>> - **callback** : ce paramètre est le nom de la fonction qui sera appelée par le thread pour traiter l'événement.<br>
->>> - Le nom par défaut est **vide**.<br>
->>> C'est une fonction interne à la classe, et cette fonction ne fait rien (passe).
->>> - Si vous ne redéfinissez pas le paramètre de rappel, une bande de roulement sera quand même créée.<br>
->>> Lorsqu'un événement se produit, la fonction **vide** sera appelée mais ne produira aucun effet.<br>
+>>> - Le nom par défaut est **empty**.<br>
+>>> Où **empty** est une fonction interne à la classe, et cette fonction ne fait rien (pass).
+>>> - Si vous ne redéfinissez pas le paramètre de rappel, un thread sera quand même créé.<br>
+>>> Lorsqu'un événement se produit, la fonction **empty** sera appelée mais elle ne produira aucun effet.<br>
 >>> - **Attention** :<br>
->>> Le nom de la fonction de traitement n'est pas une chaîne.<br>
->>> Par conséquent, il ne doit pas être écrit entre guillemets ou guillemets doubles, comme le sont généralement les chaînes.
+>>> Le nom de la fonction de traitement n'est pas une **str**.<br>
+>>> Par conséquent, ce nom ne doit pas être écrit entre guillemets ou guillemets doubles, comme le sont généralement les str.
 >>> <br><br>
->>> - **bouncetime** : temps nécessaire pour stabiliser l'état du bouton poussoir.
+>>> - **bouncetime** : temps nécessaire pour stabiliser l'état du switch.
 >>> - int [0,oo[.<br>
 >>> - L'unité est la milliseconde. Par défaut, sa valeur est fixée à 5O ms. <br>
->>> - **Réduire** cette valeur risque de rendre le comportement thérapeutique instable.<br>
+>>> - **Réduire** cette valeur risque de rendre le traitement de l'évènement instable.<br>
 >>> Il existe un risque que pour une même action le traitement soit ensuite lancé plusieurs fois de suite.<br>
->>> - **L'augmentation** de cette valeur retarde le traitement de l'action du bouton-poussoir.<br><br>
+>>> - **L'augmentation** de cette valeur retarde le traitement de l'action du switch.<br><br>
 >> </details>
 >>
 >> <details>
->> <summary><b>nettoyage (switch_names = Aucun)</b> :</summary>
+>> <summary><b>cleanup (switch_names = None)</b> :</summary>
 >> <br>
 >>
 >>>- **OBJECTIF**<br>
->>> - Le(s) commutateur(s) mentionné(s) dans le paramètre (switch_names) entraîneront :
->>> - La désactivation de chacune des broches associées à ces switchs.
->>> - Mise des broches dans un état électrique n'entraînant aucun risque de destruction de la carte Raspberry
+>>> - Le(s) switch(s) mentionné(s) dans le paramètre (switch_names) entraîneront :
+>>> - La désactivation de chacune des pin (pin_code) associées à ces switchs.
+>>> - Mise des pins dans un état électrique n'entraînant aucun risque de destruction de la carte Raspberry
 >>> - Arrêter et détruire les threads concernés.
 >>> - Après cette commande, toutes les actions sur les switchs concernés n'auront plus aucun effet..<br><br>
 >>>- **PARAMETRE**<br>
 >>> - **switch_name** : Plusieurs écritures et types sont possibles.<br><br>
->>> - Si ce paramètre n'est pas spécifié, alors sa valeur par défaut sera **Aucun**<br>
->>> Dans ce cas, les trois commutateurs **sw1**", "**sw2**" et "**sw3**" seront nettoyés.<br>
->>> Après cette commande, toute action sur les interrupteurs de la carte Maker-pHAT n'aura aucun effet.<br><br>
->>> - str **sw1**" ou "**sw2**" ou "**sw3**". Un seul nom de commutateur à la fois sera nettoyé.<br><br>
->>> - La liste ou le tuple doit contenir uniquement les termes **"sw1"** et/ou **"sw2"** et/ou **"sw3"**<br>
+>>> - Si ce paramètre n'est pas spécifié, alors sa valeur par défaut sera **None**<br>
+>>> Dans ce cas, les trois switchs **sw1**", "**sw2**" et "**sw3**" seront purgéss.<br>
+>>> Après cette commande, toute action sur les switchs de la carte Maker-pHAT n'aura aucun effet.<br><br>
+>>> - str **sw1**" ou "**sw2**" ou "**sw3**". Un seul nom de switch à la fois sera purgé.<br><br>
+>>> - La liste ou le tuple ne doit contenir que les termes **"sw1"** et/ou **"sw2"** et/ou **"sw3"**<br>
 >>> **Remarque**<br>
->>> - Ecrire [ "sw1", "sw2", "sw3" ] équivaut à ne pas saisir de valeur pour ce paramètre (Aucun cas).<br>
->>> - L'ordre des noms de commutateurs dans la liste n'a pas d'importance.<br>
+>>> - Ecrire [ "sw1", "sw2", "sw3" ] équivaut à ne pas saisir de valeur pour ce paramètre (cas None).<br>
+>>> - L'ordre des noms de switchs dans la liste n'a pas d'importance.<br>
 >>> - Une répétition accidentelle du nom d'un switch n'a aucune conséquence.<br>
->>> À la première occurrence du nom du commutateur, il sera nettoyé.<br><br>
+>>> À la première occurrence du nom du switch, il sera purgé.<br><br>
 >> </details>
 >>
 >> <details>
->> <summary><b>Details sur l'écriture des fonctions de rappel</b> :</summary>
+>> <summary><b>Details sur l'écriture des fonctions de callback</b> :</summary>
 >> <br>
 >>
 >>> <details>
->>> <summary><b>combien de formats sont autorisés ? :</b> :</summary>
+>>> <summary><b>Combien de formats sont autorisés ? :</b> :</summary>
 >>> <br>
 >>>
 >>>
 >>>> ```python
 >>>> # Premier format possible
->>>> # args est un tuple qui ne contient toujours qu'un seul élément.
+>>>> # args est un tuple qui ne contient qu'un seul élément.
 >>>> # Cet élément est le code BCM du code PIN à l'origine de l'événement, et **args[0]** est la valeur de ce code PIN.
 >>>> def your_function_name(*args) :
->>>> code_pin = arguments[0]
->>>> votre code
+>>>>     code_pin = arguments[0]
+>>>>     votre code
 >>>>
 >>>> # Deuxième format possible
 >>>> # pin_code est le code BCM du pin provoquant l'événement
->>>> def your_function_name (pin_code) :
->>>> votre code
+>>>>     def your_function_name (pin_code) :
+>>>>     votre code
 >>>> ```
 >>> </details>
 >>>
 >>> <details>
->>> <summary><b>combien de fonctions de rappel devons-nous créer ? :</b> :</summary>
+>>> <summary><b>Combien de fonctions callback devons-nous créer ? :</b> :</summary>
 >>> <br>
 >>>>
 >>>> ```python
@@ -293,28 +295,28 @@ Ce package contient trois modules décrits ci-dessous :
 >>>> # Dans ce cas, le paramètre d'entrée n'a pas d'importance puisqu'il est connu à l'avance, mais
 >>>> # le format de ce paramètre doit être indiqué même s'il ne sera pas utilisé dans votre code
 >>>>
->>>> def name_of_your_SW1_callback_function (chosen_parameter_format) :
->>>> votre code pour traiter le commutateur sw1
+>>>> def name_of_your_SW1_callback_function ( format d'entrée choisi) :
+>>>>     votre code pour traiter le switch sw1
 >>>>
->>>> def name_of_your_SW3_callback_function (chosen_parameter_format) :
->>>> votre code pour traiter le commutateur sw3
+>>>> def name_of_your_SW3_callback_function ( format d'entrée choisi) :
+>>>>     votre code pour traiter le switch sw3
 >>>> #---------------------------------------------- ---------------
 >>>>
 >>>> # DEUXIÈME POSSIBILITÉ
 >>>> # Une seule fonction commune à tous les interrupteurs.
 >>>> # C'est votre code qui adaptera le traitement en fonction du paramètre de saisie, quel que soit son format
 >>>> def name_of_your_COMMON_callback_function(pin_code) :
->>>> si pin_code == PIN_CODE_SW1 :
->>>> votre code pour le commutateur sw1
+>>>>     si pin_code == PIN_CODE_SW1 :
+>>>>         votre code pour le switch sw1
 >>>>
->>>> elif pin_code == PIN_CODE_SW2 :
->>>> votre code pour le commutateur sw2
+>>>>     elif pin_code == PIN_CODE_SW2 :
+>>>>         votre code pour le switch sw2
 >>>>
->>>> elif pin_code == PIN_CODE_SW3 :
->>>> votre code pour le commutateur sw3
+>>>>     elif pin_code == PIN_CODE_SW3 :
+>>>>         votre code pour le switch sw3
 >>>>
->>>> sinon :
->>>> votre code pour Erreur (normalement ce cas est impossible)
+>>>>     else:
+>>>>         votre code pour Erreur (normalement ce cas est impossible)
 >>>> ```
 >>> </details>
 >>>
@@ -322,7 +324,7 @@ Ce package contient trois modules décrits ci-dessous :
 >>> <summary><b>Comment traiter les événements dans le cas où trigger == GPIO.BOTH ? :</b> :</summary>
 >>> <br>
 >>>
->>>> Vous n'obtiendrez aucune information sur l'action sur le commutateur.<br>
+>>>> Vous n'obtiendrez aucune information sur l'action sur le switch.<br>
 >>>> S'agit-il d'une pression ou d'un relâchement de l'interrupteur ? Impossible de le savoir.<br>
 >>>> Le paramètre d'entrée de votre fonction de rappel ne contiendra pas cette information, il contiendra uniquement le code PIN.
 >>>> <br>
@@ -334,7 +336,7 @@ Ce package contient trois modules décrits ci-dessous :
 >>>> # Par exemple sur le switch sw1, et quel que soit le type d'événement déclencheur
 >>>>
 >>>> def name_of_your_BOTH_callback_function_on_SW1 (chosen_parameter_format) :
->>>> x.votre code pour le commutateur sw1
+>>>> x.votre code pour le switch sw1
 >>>>
 >>>> #---------------------------------------------- ---------------
 >>>>
