@@ -3,18 +3,18 @@
 [README en français](./FR_README.md)
 
 ### Que fait ce package ?
-<détails>
+<details>
 <summary>Le package <b>rasp_maker_phat</b> contient tous les modules Python nécessaires à la gestion de la carte chapeau <b>MAKER-pHAT</b>.<br>Cette carte est fabriquée par la société Cytron (https:/ /www.cytron.io)</summary><br>
    
 Exemple de montages sur modules Raspberry Pi 3B+ ou Pi Zero.<br><br>
 
 ![](./maker-pHat-card-monted.png )
 
-</détails>
+</details>
 
 
 ### Caractéristiques de cette carte.
-<détails>
+<details>
 <summary>Cette carte est dotée de huit LED, d'un buzzer, de trois boutons-poussoirs et d'une interface USB UART.<br><br></summary>
 
 >- Sa taille est la même que celle d'un module Raspberry Pi Zero. Il s'intègre parfaitement à la série de types Pi Zero SBC<br>
@@ -39,20 +39,20 @@ Exemple de montages sur modules Raspberry Pi 3B+ ou Pi Zero.<br><br>
 ![](/Documents/EN_Maker-pHAT_Overview.png)
 
 
-</détails>
+</details>
 
 ## Utiliser
 
 Ce package contient trois modules décrits ci-dessous :
 <br>**Remarque** : le nom des modules est préfixé par "**m_**" signifiant **module**.
 
-<détails>
+<details>
 <summary><b>Module : m_leds.</b> Il est chargé de gérer les 8 LED de la carte Maker-pHAT</summary><br>
 
-> <détails>
+> <details>
 > <summary><b>Méthodes</b> :</summary><br>
 >
->> <détails>
+>> <details>
 >> <summary><b>flash( led_n , tempo = 1.0 )</b></summary><br>
 >>
 >>>- **AIM** : La LED concernée passe à l'état <b>ON</b>, puis <b>tempo</b> seconde plus tard passe à l'état <b>OFF</b>. <br><br>
@@ -64,9 +64,9 @@ Ce package contient trois modules décrits ci-dessous :
 >>> - **tempo** : float, ]0, oo[
 >>> - Temps (en secondes) pendant lequel la Led 'n' sera **ON**. Passé ce délai, il passe à l'état **OFF**.<br>
 >>> Par défaut **tempo** = 1,0 secondes<br><br>
->> </détails>
+>> </details>
 >>
->> <détails>
+>> <details>
 >> <summary><b>flash_mask(mask = 0xFF, tempo = 1.0)</b></summary><br>
 >>
 >>>- **AIM** : La ou les LED concernées s'allument **ON** , puis une fois le tempo écoulé, les mêmes LED s'activent **OFF**<br><br>
@@ -80,9 +80,9 @@ Ce package contient trois modules décrits ci-dessous :
 >>> - **tempo** : float, ]0, oo[
 >>> - Temps (en secondes) pendant lequel la Led 'n' sera **ON**. Passé ce délai, il passe à l'état **OFF**.<br>
 >>> Par défaut **tempo** = 1,0 seconde<br><br>
->> </détails>
+>> </details>
 >>
->> <détails>
+>> <details>
 >> <summary><b>set_on_leds(masque = 0x00)</b></summary><br>
 >>
 >>>- **AIM** : La ou les LED concernées s'allument **ON**.</b></b>
@@ -95,9 +95,9 @@ Ce package contient trois modules décrits ci-dessous :
 >>> - masque = 0xFF est associé à l'index LEDS {7, 6, 5, 4, 3, 2, 1, 0}<br><br>
 >>> - **REMARQUE 1** : si masque = 0x00 alors l'état des 8 LED ne sera pas modifié.
 >>> - **REMARQUE 2** : si une LED affectée par le masque est à l'état **ON**, alors l'état reste à **ON**.
->> </détails>
+>> </details>
 >>
->> <détails>
+>> <details>
 >> <summary><b>set_off_leds(masque = 0x00)</b></summary><br>
 >>
 >>>- **AIM** : La ou les LED concernées s'éteignent **OFF**.</b></b>
@@ -110,9 +110,9 @@ Ce package contient trois modules décrits ci-dessous :
 >>> - masque = 0xFF est associé à l'index LEDS {7, 6, 5, 4, 3, 2, 1, 0}<br><br>
 >>> - **REMARQUE 1** : si masque = 0x00 alors l'état des 8 LED ne sera pas modifié.
 >>> - **REMARQUE 2** : si une LED affectée par le masque est à l'état **OFF**, alors l'état reste à **OFF**.
->> </détails>
+>> </details>
 >>
->> <détails>
+>> <details>
 >> <summary><b>Exemple de code</b></summary><br>
 >>
 >>> ```python
@@ -135,16 +135,16 @@ Ce package contient trois modules décrits ci-dessous :
 >>> leds.flash_mask( x055, 1.5 )
 >>> leds.flash_mask(x0AA, 2.6)
 >>> ```
->> </détails>
+>> </details>
 >>
 >> `_______________________________________________________________________________________________`
-> </détails>
-</détails>
+> </details>
+</details>
 
-<détails>
+<details>
 <summary><b>Module : m_buttons.</b> Il est chargé de gérer les 3 boutons poussoirs de la carte Maker-pHAT.</summary><br>
 
-> <détails>
+> <details>
 > <summary><b>Getters</b> :</summary>
 > <br>
 >
@@ -156,12 +156,12 @@ Ce package contient trois modules décrits ci-dessous :
 >> renvoie le dictionnaire des couples (switch_name, pin_code) où switch_name est la clé.<br>
 >>- **dico_pin_code_to_switch_name**<br>
 >> renvoie le dictionnaire des couples (pin_code, switch_name) où code_pin est la clé.<br>
-> </détails>
+> </details>
 >
-> <détails>
+> <details>
 > <summary><b>Méthodes</b> :</summary><br>
 >
->> <détails>
+>> <details>
 >> <summary><b>logical_state_pins (list_of_switch_name)</b> :</summary><br>
 >>
 >>>- **OBJECTIF**<br>
@@ -202,9 +202,9 @@ Ce package contient trois modules décrits ci-dessous :
 >>> logical_state_pins( ["sw3"] ) --> { "sw3":"OFF" }
 >>> logical_state_pins( ["sw1", "sw2", "sw3"] ) --> { "sw1": "ON", "sw2": Aucun, "sw3": "OFF" }
 >>> ```
->> </détails>
+>> </details>
 >>
->> <détails>
+>> <details>
 >> <summary><b>add_event_detect_switch (switch_name, trigger = GPIO.FALLING, callback = vide, temps de rebond = 50)</b> :</summary><br>
 >>
 >>>- **OBJECTIF**<br>
@@ -233,9 +233,9 @@ Ce package contient trois modules décrits ci-dessous :
 >>> - **Réduire** cette valeur risque de rendre le comportement thérapeutique instable.<br>
 >>> Il existe un risque que pour une même action le traitement soit ensuite lancé plusieurs fois de suite.<br>
 >>> - **L'augmentation** de cette valeur retarde le traitement de l'action du bouton-poussoir.<br><br>
->> </détails>
+>> </details>
 >>
->> <détails>
+>> <details>
 >> <summary><b>nettoyage (switch_names = Aucun)</b> :</summary>
 >> <br>
 >>
@@ -257,13 +257,13 @@ Ce package contient trois modules décrits ci-dessous :
 >>> - L'ordre des noms de commutateurs dans la liste n'a pas d'importance.<br>
 >>> - Une répétition accidentelle du nom d'un switch n'a aucune conséquence.<br>
 >>> À la première occurrence du nom du commutateur, il sera nettoyé.<br><br>
->> </détails>
+>> </details>
 >>
->> <détails>
->> <summary><b>Détails sur l'écriture des fonctions de rappel</b> :</summary>
+>> <details>
+>> <summary><b>Details sur l'écriture des fonctions de rappel</b> :</summary>
 >> <br>
 >>
->>> <détails>
+>>> <details>
 >>> <summary><b>combien de formats sont autorisés ? :</b> :</summary>
 >>> <br>
 >>>
@@ -281,9 +281,9 @@ Ce package contient trois modules décrits ci-dessous :
 >>>> def your_function_name (pin_code) :
 >>>> votre code
 >>>> ```
->>> </détails>
+>>> </details>
 >>>
->>> <détails>
+>>> <details>
 >>> <summary><b>combien de fonctions de rappel devons-nous créer ? :</b> :</summary>
 >>> <br>
 >>>>
@@ -316,9 +316,9 @@ Ce package contient trois modules décrits ci-dessous :
 >>>> sinon :
 >>>> votre code pour Erreur (normalement ce cas est impossible)
 >>>> ```
->>> </détails>
+>>> </details>
 >>>
->>> <détails>
+>>> <details>
 >>> <summary><b>Comment traiter les événements dans le cas où trigger == GPIO.BOTH ? :</b> :</summary>
 >>> <br>
 >>>
@@ -385,11 +385,11 @@ Ce package contient trois modules décrits ci-dessous :
 >>>> # votre code spécifique pour l'événement RISING commence ici
 >>>> votre code....
 >>>> ```
->>>> </détails>
+>>>> </details>
 >>>>
->>> </détails>
+>>> </details>
 >>>
->>> <détails>
+>>> <details>
 >>> <summary><b>Exemple de code</b></summary>
 >>> <br>
 >>>
@@ -502,9 +502,9 @@ Ce package contient trois modules décrits ci-dessous :
 >>> - flotte dans ]0, oo[.<br>
 >>> - Exprimé en secondes <br>
 >>> - Valeur par défaut 1,0 seconde.<br><br>
->> </détails>
+>> </details>
 >>
->> <détails>
+>> <details>
 >> <summary><b>Exemple de code</b> :</summary><br>
 >>
 >>> ```python
@@ -529,9 +529,9 @@ Ce package contient trois modules décrits ci-dessous :
 >>> ```
 >>>
 >>>`_______________________________________________________________________________________________`
->> </détails>
-> </détails>
-</détails>
+>> </details>
+> </details>
+</details>
  
 ## Contribution
 Les demandes de tirage sont les bienvenues.<br>
