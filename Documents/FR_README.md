@@ -2,17 +2,17 @@
 [README in english](./EN_README.md)
 
 ### Que fait ce package ?
-<détails>
+<details>
 <summary>Le package <b>rasp_maker_phat</b> contient tous les modules Python nécessaires à la gestion de la carte chapeau <b>MAKER-pHAT</b>.<br>Cette carte est fabriquée par la société Cytron (https:/ /www.cytron.io)</summary><br>
    
 Exemple de montages sur modules Raspberry Pi 3B+ ou Pi Zero.<br><br>
 
 ![](./maker-pHat-card-monted.png )
 
-</détails>
+</details>
 
 ### Caractéristiques de cette carte.
-<détails>
+<details>
 <summary>Cette carte est dotée de huit LED, d'un buzzer, de trois boutons-poussoirs (switch) et d'une interface USB UART.<br><br></summary>
 
 >- Sa taille est la même que celle d'un module Raspberry Pi Zero. Il s'intègre parfaitement à la série de types Pi Zero SBC<br>
@@ -37,7 +37,7 @@ Exemple de montages sur modules Raspberry Pi 3B+ ou Pi Zero.<br><br>
 ![](/Documents/EN_Maker-pHAT_Overview.png)
 
 
-</détails>
+</details>
 
 
 ## Use
@@ -70,13 +70,13 @@ This package contains three modules which are described below:
 Ce package contient trois modules décrits ci-dessous :
 <br>**Remarque** : le nom des modules est préfixé par "**m_**" signifiant **module**.
 
-<détails>
+<details>
 <summary><b>Module : m_leds.</b> Il est chargé de gérer les 8 LED de la carte Maker-pHAT</summary><br>
 
-> <détails>
+> <details>
 > <summary><b>Méthodes</b> :</summary><br>
 >
->> <détails>
+>> <details>
 >> <summary><b>flash( led_n , tempo = 1.0 )</b></summary><br>
 >>
 >>>- **AIM** : La LED concernée passe à l'état <b>ON</b>, puis <b>tempo</b> secondes plus tard elle passe à l'état <b>OFF</b>. <br><br>
@@ -88,9 +88,9 @@ Ce package contient trois modules décrits ci-dessous :
 >>> - **tempo** : float, ]0, oo[
 >>> - Temps (en secondes) pendant lequel la Led **led_n** sera **ON**. Passé ce délai, elle passe à l'état **OFF**.<br>
 >>> Par défaut **tempo** = 1,0 secondes<br><br>
->> </détails>
+>> </details>
 >>
->> <détails>
+>> <details>
 >> <summary><b>flash_mask(mask = 0xFF, tempo = 1.0)</b></summary><br>
 >>
 >>>- **AIM** : La ou les LED concernées s'allument **ON** , puis une fois le tempo écoulé, les mêmes LED s'éteignent **OFF**<br><br>
@@ -104,9 +104,9 @@ Ce package contient trois modules décrits ci-dessous :
 >>> - **tempo** : float, ]0, oo[
 >>> - Temps (en secondes) pendant lequel les Leds du masque seront allumées **ON**. Passé ce délai, elles s'éteignent **OFF**.<br>
 >>> Par défaut **tempo** = 1.0 secondes<br><br>
->> </détails>
+>> </details>
 >>
->> <détails>
+>> <details>
 >> <summary><b>set_on_leds(mask = 0x00)</b></summary><br>
 >>
 >>>- **AIM** : La ou les LED concernées s'allument **ON**.</b></b>
@@ -119,9 +119,9 @@ Ce package contient trois modules décrits ci-dessous :
 >>> - mask = 0xFF est associé à l'index des LEDS {7, 6, 5, 4, 3, 2, 1, 0}<br><br>
 >>> - **REMARQUE 1** : si mask = 0x00 alors l'état des 8 LED ne sera pas modifié.
 >>> - **REMARQUE 2** : si une LED affectée par le masque est à l'état **ON**, alors l'état reste à **ON**.
->> </détails>
+>> </details>
 >>
->> <détails>
+>> <details>
 >> <summary><b>set_off_leds(mask = 0x00)</b></summary><br>
 >>
 >>>- **AIM** : La ou les LED concernées s'éteignent **OFF**.</b></b>
@@ -134,7 +134,7 @@ Ce package contient trois modules décrits ci-dessous :
 >>> - mask = 0xFF est associé à l'index LEDS {7, 6, 5, 4, 3, 2, 1, 0}<br><br>
 >>> - **REMARQUE 1** : si mask = 0x00 alors l'état des 8 LED ne sera pas modifié.
 >>> - **REMARQUE 2** : si une LED affectée par le masque est éteinte **OFF**, alors elle reste éteinte.
->> </détails>
+>> </details>
 >>
 >>  <details>
 >>  <summary><b>Exemple de programme</b></summary><br>  
@@ -167,10 +167,10 @@ Ce package contient trois modules décrits ci-dessous :
 >  </details>
 </details>
 
-<détails>
+<details>
 <summary><b>Module : m_buttons.</b> Il gère les 3 boutons poussoirs (switch) de la carte Maker-pHAT.</summary><br>
 
-> <détails>
+> <details>
 > <summary><b>Getters</b> :</summary>
 > <br>
 >
@@ -182,12 +182,12 @@ Ce package contient trois modules décrits ci-dessous :
 >> renvoie le dictionnaire des couples (switch_name, pin_code) où switch_name est la clé.<br>
 >>- **dico_pin_code_to_switch_name**<br>
 >> renvoie le dictionnaire des couples (pin_code, switch_name) où pin_code est la clé.<br>
-> </détails>
+> </details>
 >
-> <détails>
+> <details>
 > <summary><b>Méthodes</b> :</summary><br>
 >
->> <détails>
+>> <details>
 >> <summary><b>logical_state_pins (list_of_switch_name)</b> :</summary><br>
 >>
 >>>- **OBJECTIF**<br>
@@ -228,13 +228,9 @@ Ce package contient trois modules décrits ci-dessous :
 >>> logical_state_pins( ["sw3"] ) --> { "sw3":"OFF" }
 >>> logical_state_pins( ["sw1", "sw2", "sw3"] ) --> { "sw1": "ON", "sw2": Aucun, "sw3": "OFF" }
 >>> ```
->> </détails>
-​
-2 334 / 5 000
-Résultats de traduction
-Résultat de traduction
+>> </details>
 >>
->> <détails>
+>> <details>
 >> <summary><b>add_event_detect_switch (switch_name, trigger = GPIO.FALLING, callback = vide, temps de rebond = 50)</b> :</summary><br>
 >>
 >>>- **OBJECTIF**<br>
@@ -262,17 +258,10 @@ Résultat de traduction
 >>> - L'unité est la milliseconde. Par défaut, sa valeur est fixée à 5O ms. <br>
 >>> - **Réduire** cette valeur risque de rendre le comportement thérapeutique instable.<br>
 >>> Il existe un risque que pour une même action le traitement soit ensuite lancé plusieurs fois de suite.<br>
->>> - **L'augmentation** de cette valeur retarde le traitement de l'action du bouton-poussoir.<br><br>
->> </détails>
-Types de traductions
-Traduction de texte
-Texte source
-​
-1 667 / 5 000
-Résultats de traduction
-Résultat de traduction
+>>> -e**L'augmentation** de cette valeur retarde le traitement de l'action du bouton-poussoir.<br><br>
+>> </details>
 >>
->> <détails>
+>> <details>
 >> <summary><b>nettoyage (switch_names = Aucun)</b> :</summary>
 >> <br>
 >>
@@ -294,13 +283,13 @@ Résultat de traduction
 >>> - L'ordre des noms de commutateurs dans la liste n'a pas d'importance.<br>
 >>> - Une répétition accidentelle du nom d'un switch n'a aucune conséquence.<br>
 >>> À la première occurrence du nom du commutateur, il sera nettoyé.<br><br>
->> </détails>
+>> </details>
 >>
->> <détails>
+>> <details>
 >> <summary><b>Détails sur l'écriture des fonctions de rappel</b> :</summary>
 >> <br>
 >>
->>> <détails>
+>>> <details>
 >>> <summary><b>combien de formats sont autorisés ? :</b> :</summary>
 >>> <br>
 >>>
@@ -318,9 +307,9 @@ Résultat de traduction
 >>>> def your_function_name (pin_code) :
 >>>> votre code
 >>>> ```
->>> </détails>
+>>> </details>
 >>>
->>> <détails>
+>>> <details>
 >>> <summary><b>combien de fonctions de rappel devons-nous créer ? :</b> :</summary>
 >>> <br>
 >>>>
@@ -353,16 +342,9 @@ Résultat de traduction
 >>>> sinon :
 >>>> votre code pour Erreur (normalement ce cas est impossible)
 >>>> ```
->>> </détails>
+>>> </details>
 >>>
-Types de traductions
-Traduction de texte
-Texte source
-​
-1 528 / 5 000
-Résultats de traduction
-Résultat de traduction
->>> <détails>
+>e> <détails>
 >>> <summary><b>Comment traiter les événements dans le cas où trigger == GPIO.BOTH ? :</b> :</summary>
 >>> <br>
 >>>
@@ -436,7 +418,7 @@ Résultat de traduction
 >>>> # votre code spécifique pour l'événement RISING commence ici
 >>>> votre code....
 >>>> ```
->>>> </détails>
+>>>> </details>
 >>>>
 Types de traductions
 Traduction de texte
@@ -445,9 +427,9 @@ Texte source
 3 468 / 5 000
 Résultats de traduction
 Résultat de traduction
->>> </détails>
+>>> </details>
 >>>
->>> <détails>
+>>> <details>
 >>> <summary><b>Exemple de code</b></summary>
 >>> <br>
 >>>
@@ -518,20 +500,20 @@ Résultat de traduction
 >>>> imprimer()
 >>>>
 >>>> ```
->>> </détails>
+>>> </details>
 >>>
 >>>`_______________________________________________________________________________________________`
->> </détails>
+>> </details>
 >
-> </détails>
+> </details>
 
-<détails>
+<details>
 <summary><b>Module : m_buzzer.</b> Il est chargé de gérer le buzzer unique de la carte Maker-pHAT</summary><br>
    
-> <détails>
+> <details>
 > <summary><b>Méthodes</b> :</summary><br>
 >
->> <détails>
+>> <details>
 >> <summary><b>bip (beep_duration = 1.0)</b> :</summary><br>
 >>
 >>>- **AIM** : Pendant un temps exprimé en secondes, le buzzer émet un son.<br><br>
@@ -539,9 +521,9 @@ Résultat de traduction
 >>> - **beep_duration** : flotte dans ]0, oo[.<br>
 >>> - Unité secondes
 >>> - Valeur par défaut 1 seconde.
->> </détails>
+>> </details>
 >>
->> <détails>
+>> <details>
 >> <summary><b>beep_repeat (number_cycles = 2, beep_duration = 1.0, noiseless_duration = 1.0)</b> :</summary><br>
 >>
 >>>- **OBJECTIF**<br>
@@ -560,9 +542,9 @@ Résultat de traduction
 >>> - flotte dans ]0, oo[.<br>
 >>> - Exprimé en secondes <br>
 >>> - Valeur par défaut 1,0 seconde.<br><br>
->> </détails>
+>> </details>
 >>
->> <détails>
+>> <details>
 >> <summary><b>Exemple de code</b> :</summary><br>
 >>
 >>> ```python
@@ -587,9 +569,9 @@ Résultat de traduction
 >>> ```
 >>>
 >>>`_______________________________________________________________________________________________`
->> </détails>
-> </détails>
-</détails>
+>> </details>
+> </details>
+</details>
  
 ## Contribution
 Les demandes de tirage sont les bienvenues.<br>
