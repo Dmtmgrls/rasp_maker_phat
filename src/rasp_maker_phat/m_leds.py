@@ -37,11 +37,16 @@ class Leds():
         for i in range(0,len(self.LED)):
             GPIO.setup(self.LED[ i ], GPIO.OUT)
 
-
+    # Destructor
+    def __del__(self):
+        # only affects the LED pins, and no other GPIO pins
+        GPIO.cleanup(self.LED)
+    
+    # GETTER
     def led_range( self ):
         return range(0,8)
     
-
+    # METHODES
     def flash( self, led_n , tempo = 1.0 ):
         """
         Set ON the Led number <led_n> for <tempo> seconds
@@ -57,47 +62,40 @@ class Leds():
         
         @return : nothing
         """
-        try:
-            led_pin = self.LED[ led_n ]
-        except IndexError:
-            plage = self.led_range()
-            print(f"Error :\nWhere? Methode   --> Maker_pHat.flash( led_n ) {__name__}")
-            print(f"Why   ? Parameter --> led_n = {led_n} is out of {plage}\n")
-        else:
-            GPIO.output( led_pin , self.ON )
-            time.sleep(tempo)
-            GPIO.output( led_pin , self.OFF )
+        led_pin = self.LED[led_n]
+        GPIO.output( led_pin , self.ON )
+        time.sleep(tempo)
+        GPIO.output( led_pin , self.OFF )
             
 
-    def flash_mask( self, mask = 0xFF, tempo = 1.0 ):
+    def flash_mask( self, mask, tempo = 1.0 ):
         """
         Switch ON all Leds whose <mask> bits are set to 1 for <tempo> seconds
 
-        @param mask   : must be from x001 to x0FF
-                                  x0A0 corresponds to the rightmost Led of Maker pHat
-                                  x001 to the leftmost Led
-                                  Warnning : if mask = x000 then all Led will be OFF
-        @type mask     : integer
+        @param mask   : must be from 0x01 to 0xFF
+                                  0x01 corresponds to the rightmost Led of Maker pHat
+                                  0x80 to the leftmost Led
+                                  Warnning : if mask = 0x00 then all Led are not will not be modified
+        @type mask    : integer
         
-        @param tempo : number of seconds the Led is ON  
-                                  default value = 1.0  second
-        @type tempo    : integer or float strictly positive
+        @param tempo  : number of seconds the Led is ON  default value = 1.0  second
+        @type  tempo  : integer or float strictly positive
         
-        @return            : nothing
+        @return       : nothing
         """        
         prob = 0x01
         led_on = []
-        
+
+        #Selected Led set ON 
         for led_n in range(0,8):
             if prob & mask != 0 :
                 GPIO.output(self.LED[ led_n ] , self.ON)
                 led_on.append( led_n )
-            else:
-                GPIO.output(self.LED[ led_n ] , self.OFF)
             prob = prob<<1
         
         time.sleep(tempo)
 
+        # Selected Led se OFF
         for led_n in led_on:
             GPIO.output(self.LED[ led_n ], self.OFF)
 
@@ -106,13 +104,13 @@ class Leds():
         """
         Set ON all Leds whose <mask> bits are set to 1
 
-        @param mask   : must be from x001 to x0FF
-                                  x0A0 corresponds to the rightmost Led of Maker pHat
-                                  x001 to the leftmost Led
-                                  Warnning : if mask = x000 then all Led are not will not be modified
-        @type mask     : integer
+        @param mask   : must be from 0x01 to 0xFF
+                                  0x01 corresponds to the rightmost Led of Maker pHat
+                                  0x80 to the leftmost Led
+                                  Warnning : if mask = 0x00 then all Led are not will not be modified
+        @type mask    : integer
         
-        @return            : nothing
+        @return       : nothing
         """ 
         prob = 0x01      
         for led_n in range(0,8):
@@ -124,13 +122,13 @@ class Leds():
         """
         Set OFF all Leds whose <mask> bits are set to 1
 
-        @param mask   : must be from x001 to x0FF
-                                  x0A0 corresponds to the rightmost Led of Maker pHat
-                                  x001 to the leftmost Led
-                                  Warnning : if mask = x000 then all Led are not will not be modified
-        @type mask     : integer
+        @param mask   : must be from 0x01 to 0xFF
+                                  0x01 corresponds to the rightmost Led of Maker pHat
+                                  0x80 to the leftmost Led
+                                  Warnning : if mask = 0x00 then all Led are not will not be modified
+        @type mask    : integer
         
-        @return            : nothing
+        @return       : nothing
         """         
         prob = 0x01      
         for led_n in range(0,8):
@@ -139,28 +137,36 @@ class Leds():
             prob = prob<<1              
 
     def cleanup(self):
-        GPIO.cleanup()
+        # only affects the LED pins, and no other GPIO pins
+        GPIO.cleanup(self.LED)
     
 #======================================
 def main():
+    import time
 
     leds = Leds()
 
     for i in leds.led_range():
         leds.flash( i, 0.2 )
         
-    leds.flash( 11, 0.2 )
+    for i in [6,5,4,3,2,1,0]:
+        leds.flash( i, 0.2 )
+
   
-    leds.flash_mask( 0xAA )
+    leds.set_off_leds( 0xFF)
+    leds.flash_mask( 0x33 )
+    leds.flash_mask( 0xCC )
     leds.flash_mask( 0xF0 )
     leds.flash_mask( 0x0F )
 
+    leds.set_off_leds( 0xFF)
+    tempo =  0.6
+    leds.flash_mask( 0xAA , tempo)
+    leds.flash_mask( 0x55 , tempo)
+    leds.flash_mask( 0xF0 , tempo)
+    leds.flash_mask( 0x0F , tempo)
 
-    leds.set_on_leds( 0xFF)
-    leds.flash_mask( 0xAA , 0.5)
-    leds.flash_mask( 0xF0 , 0.5)
-    leds.flash_mask( 0x0F , 0.5)
-
+    del leds
     
 if __name__ == "__main__":
     main()

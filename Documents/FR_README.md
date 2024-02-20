@@ -1,6 +1,6 @@
 # rasp_maker_phat
 
-[README en français](./FR_README.md)
+[README in english](./EN_README.md)
 
 ### Que fait ce package ?
 <details>
@@ -48,7 +48,15 @@ Ce package contient trois modules décrits ci-dessous :
 
 <details>
 <summary><b>Module : m_leds.</b> Il gère uniquement les 8 LED de la carte Maker-pHAT</summary><br>
-
+   
+> <details>
+> <summary><b>Getters</b> :</summary><br>
+>
+>>- **led_range** renvoie la liste des indices des LED.<br>
+>>     - L'index le plus bas correspond à la LED la plus à droite de la carte Maker-pHAT.<br>
+>>     - L'indice le plus élevé correspond à la LED la plus à gauche de la carte Maker-pHAT.<br>
+> </details>
+>
 > <details>
 > <summary><b>Méthodes</b> :</summary><br>
 >
@@ -61,15 +69,15 @@ Ce package contient trois modules décrits ci-dessous :
 >>>       - **int** dans l'ensemble [0, 7]
 >>>       - led_n = 0 correspond à la LED à l'extrême droite de la carte Maker-pHAT.
 >>>       - led_n = 7 correspond à  la LED à l'extrême gauche de la carte Maker-pHAT.<br><br>
->>>    - **tempo** : Temps (en secondes) pendant lequel la Led d'indice **led_n** sera **allumée**. Passé ce délai, La led s'éteind.<br>
->>>       - float, ]0, oo[
->>>       - Par défaut **tempo** = 1,0 seconde<br><br>
+>>>    - **tempo** : Temps (en secondes) pendant lequel la Led d'indice **led_n** sera **allumée**. Passé ce délai, la Led s'éteind.<br>
+>>>       - **float** dans l'ensemble ]0.0,  oo[
+>>>       - Par défaut **tempo** = 1.0 seconde<br><br>
 >> </details>
 >>
 >> <details>
->> <summary><b>flash_mask(mask = 0xFF, tempo = 1.0)</b></summary><br>
+>> <summary><b>flash_mask(mask, tempo = 1.0)</b></summary><br>
 >>
->>>- **BUT** : La ou les LED sélectionnées par le **mask** s'allument, puis une fois le tempo écoulée, les mêmes LED s'éteignent.<br><br>
+>>>- **BUT** : La ou les LED sélectionnées par le **mask** s'allument, puis une fois la tempo écoulée, les mêmes LED s'éteignent.<br><br>
 >>>- **PARAMETRE** :
 >>>    - **mask** : masque de 8 bits, chaque bit est associé à une LED.
 >>>       - **int** dans l'ensemble [0x00, 0xFF]
@@ -78,7 +86,7 @@ Ce package contient trois modules décrits ci-dessous :
 >>>       - mask = 0b01010101 = 0x55 est associé aux LEDS d'index {6, 4, 2, 0}
 >>>       - mask = 0xFF est associé aux LEDS  d'index {7, 6, 5, 4, 3, 2, 1, 0}<br><br>
 >>>    - **tempo** : Temps (en secondes) pendant lequel la ou les Led seront allumées. Passé ce délai, elles s'éteindront.<br>
->>>       - **float**, ]0, oo[
+>>>       - **float** dans l'ensemble  ]0, oo[
 >>>       - Par défaut **tempo** = 1,0 seconde<br><br>
 >> </details>
 >>
@@ -88,7 +96,7 @@ Ce package contient trois modules décrits ci-dessous :
 >>>- **BUT** : La ou les LED sélectionnées par le **mask** s'allument, et reste allumées.</br></br>
 >>>- **PARAMETRE** :
 >>>    - **mask** : masque de 8 bits, chaque bit est associé à une LED.
->>>       - **int** [0x00, 0xFF]
+>>>       - **int** dans l'ensemble  [0x00, 0xFF]
 >>>       - mask = 0x01 est associé à la LED située à l'extrême droite de la carte Maker-pHAT.
 >>>       - mask = 0x80 est associé à la LED située à l'extrême gauche de la carte Maker-pHAT.
 >>>       - mask = 0b01010101 = 0x55 est associé aux LEDS d'index {6, 4, 2, 0}
@@ -103,7 +111,7 @@ Ce package contient trois modules décrits ci-dessous :
 >>>- **BUT** : La ou les LED sélectionnées par le **mask** s'éteignent, et reste éteintes</br></br>
 >>>- **PARAMETRE** :
 >>>    - **mask** : masque de 8 bits, chaque bit est associé à une LED.
->>>       - **int** [0x00, 0xFF]
+>>>       - **int** dans l'ensemble  [0x00, 0xFF]
 >>>       - mask = 0x01 est associé à la LED située à l'extrême droite de la carte Maker-pHAT.
 >>>       - mask = 0x80 est associé à la LED située à l'extrême gauche de la carte Maker-pHAT.
 >>>       - mask = 0b01010101 = 0x55 est associé aux LEDS d'index {6, 4, 2, 0}
@@ -111,6 +119,45 @@ Ce package contient trois modules décrits ci-dessous :
 >>>       - **REMARQUE 1** : si masque = 0x00 alors l'état des 8 LED ne sera pas modifié.
 >>>       - **REMARQUE 2** : si une LED sélectionnée par le masque est déjà éteinte, alors elle reste éteinte<br>
 >> </details>
+>>
+>> <details>
+>> <summary><b>cleanup()</b></summary><br>
+>>
+>>>- **BUT** : <br>
+>>>     -  Configure les pins de toutes les Leds dans un état electrique sans danger pour le Raspberry.<br>
+>>>     -  N'agit que sur les pin des LEDS, et aucune autres pin du GPIO.<br>
+>>>     -  Lorque votre programme n'a plus usage des Leds il est bon d'appeller cette méthode.<br>
+>>>        Cependant, si vous oubliez de le faire, la méthode magique **\_\_del\_\_** sera appelée au moment de la destruction de l'instance.<br>
+>>>        Voir la méthode **\_\_del\_\_**
+>>>``` python
+>>>   leds = m_leds.Leds()
+>>>   # début de votre code ....
+>>>   ...
+>>>   # fin de votre code ...
+>>>   # remise des pins dans un etat électrique sans risque pour le Raspberry.
+>>>   leds.cleanup()
+>>>```
+>> </details>
+>>
+>> <details>
+>> <summary><b>__del__</b></summary><br>
+>>
+>>>- Méthode magique qui a été redéfinie : <br>
+>>>     -  Configure les pins de toutes les Leds dans un état electrique sans danger pour le Raspberry.<br>
+>>>     -  N'agit que sur les pin des LEDS, et aucune autres pin du GPIO.<br>   
+>>>     -  Est appelé automatiquement par le gabarge collector (ramasse miettes).<br>
+>>>     -  Il est possible de l'appeler a la fin du programme par l'intermédiaire de la commande **del**
+>>>``` python
+>>>   # Création instance
+>>>   leds = m_leds.Leds()
+>>>
+>>>   # début de votre code ....
+>>>   ...
+>>>   # fin de votre code ...
+>>>   
+>>>   # Destruction de l'instance sans risque pour le Raspberry
+>>>   del leds
+>>>```
 >>
 >> <details>
 >> <summary><b>Exemple de code</b></summary><br>
@@ -126,16 +173,16 @@ Ce package contient trois modules décrits ci-dessous :
 >>> # Allume la Led n°5 pendant 0,3 seconde puis l'éteind.
 >>> leds.flash( 5, 0.3 )
 >>>
->>> # Etteind toutes les LED, puis allume uniquement les LEDs d'index impair.
->>> leds.set_off_leds(x0FF)
->>> leds.set_on_leds(x055)
+>>> # Etteind toutes les LED, puis allume uniquement les LEDs d'index pair {6,4,2,0}.
+>>> leds.set_off_leds(0xFF)
+>>> leds.set_on_leds(0x55)
 >>>
 >>> # On commence par eteindre toutes les LEDs
->>> # Puis, on allume toutes les LEDs paires pendant  1,5 seconde
->>> # Puis, on allume toutes les LED impaires pendant  2,6 secondes
->>> leds.set_off_leds(x0FF)
->>> leds.flash_mask( x055, 1.5 )
->>> leds.flash_mask( x0AA, 2.6 )
+>>> # Puis, on allume toutes les LEDs d'indexs pairs pendant  1,5 seconde
+>>> # Puis, on allume toutes les LED d'indexs impairs pendant  2,6 secondes
+>>> leds.set_off_leds(0xFF)
+>>> leds.flash_mask( 0x55, 1.5 )
+>>> leds.flash_mask( 0xAA, 2.6 )
 >>> ```
 >> </details>
 >>
@@ -541,5 +588,6 @@ Assurez-vous de mettre à jour les tests le cas échéant.<br>
 ## Licence
 
 [MIT](https://choosealicense.com/licenses/mit/
+
 
 

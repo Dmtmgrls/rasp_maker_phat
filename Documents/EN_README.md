@@ -49,6 +49,15 @@ This package contains three modules which are described below:
 <details>
 <summary><b>Module : m_leds.</b> It is responsible for managing the 8 LEDs of the Maker-pHAT card</summary><br>
 
+>   <details>
+>      <summary><b>Getters</b> :</summary> 
+>      <br>
+>
+>>-   **led_range**  return the list of hight index of LEDs.<br>
+>>           -    The lowest index corresponds to the rightmost LED on the Maker-pHAT card.<br>
+>>           -    The highest index corresponds to the leftmost LED on the Maker-pHAT card.<br>
+>   </details>
+>
 >  <details>
 >  <summary><b>Methodes</b> :</summary><br> 
 >
@@ -112,6 +121,46 @@ This package contains three modules which are described below:
 >>>      -  **NOTE 2**: if an LED affected by the mask is in the **OFF** state, then the state remains at **OFF**.
 >>  </details>
 >>
+>> <details>
+>> <summary><b>cleanup()</b></summary><br>
+>>
+>>>- **AIM**: <br>
+>>>     - Configures the pins of all LEDs in an electrical state safe for the Raspberry.<br>
+>>>     - Only acts on the LED pins, and no other GPIO pins.<br>
+>>>     - When your program no longer uses LEDs, it is a good idea to call this method.<br>
+>>>       However, if you forget to do this, the magic method **\_\_del\_\_** will be called when the instance is destroyed.<br>
+>>>       See method **\_\_del\_\_**
+>>>``` python
+>>> leds = m_leds.Leds()
+>>>
+>>> # start of your code....
+>>> ...
+>>> # end of your code...
+>>>
+>>> # return all pins of LEDs to an electrical state without risk for the Raspberry.
+>>> leds.cleanup()
+>>>```
+>> </details>
+>>
+>> <details>
+>> <summary><b>__del__</b></summary><br>
+>>
+>>>- Magical method which has been redefined: <br>
+>>>     -   Configures the pins of all LEDs in an electrical state safe for the Raspberry.<br>
+>>>     -   Only acts on the LED pins, and no other GPIO pins.<br>
+>>>     -   Is called automatically by the collector template (crumb collector).<br>
+>>>     -   It is possible to call it at the end of the program using the **del** command
+>>>``` python
+>>> # Instance creation
+>>> leds = m_leds.Leds()
+>>>
+>>> # start of your code....
+>>> ...
+>>> # end of your code...
+>>>
+>>> # Destruction of the instance without risk for the Raspberry
+>>> del leds
+>>>```
 >>  <details>
 >>  <summary><b>Code example</b></summary><br>  
 >>
@@ -541,5 +590,6 @@ Be sure to update tests as appropriate.<br>
 ## License
 
 [MIT](https://choosealicense.com/licenses/mit/
+
 
 
